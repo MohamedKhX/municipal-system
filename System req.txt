@@ -1,0 +1,97 @@
+Plan:
+
+1- Get the full idea
+2- Design the full website
+3- Make the database
+4- The Dashboard!
+
+
+
+The Plan
+
+1- Reports System includes
+	- Voting
+	- Tracking Requests Status
+
+2- Notifications System
+
+3- Licensing and permits system
+
+4- News and its Include
+	- Campaigns
+	- Activities
+	- Others
+
+5- Interactive map and its Include
+	- See the requests place
+	- See the activities place
+	- Others
+
+6- Service quality evaluation system
+
+
+
+The Design Pages
+0- Navbar
+	- Home page
+	- Auth buttons
+	- Reports
+	- News
+
+
+1- Login and register page
+
+2- The home page
+	- News 						Done
+	- Reports
+	- Interactive map
+	- services that provided by the municipal
+	- Licensing and permits
+
+3- Reports page
+	- index (create and edit)
+	- show (vote, status)
+
+4- News page
+	- index
+	- show
+
+5- Licensing and permits requests page
+
+
+
+Database Design
+Tables
+
+1- Reports
+	- title	(varchar)
+	- description (text)
+	- location (not sure yet) [but it should save a location form google maps]
+	- Municipality (varchar)
+	- Street (varchar)
+	- type (Enum[road, accident, others])
+2- News
+	- title
+	- body
+	- thumbnail
+3- Services
+	- name
+4- Requests
+	- first_name
+	- middle_name
+	- last_name
+	- type (Enum[License, permit])
+5- Services_Ratings
+6- votings
+
+
+
+
+
+
+
+
+
+
+
+
