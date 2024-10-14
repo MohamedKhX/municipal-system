@@ -63,26 +63,46 @@ The Design Pages
 Database Design
 Tables
 
+0- Users
+    - type
+    - Phone Number      (varchar)
+    - national number   (varchar)
+
 1- Reports
+    - user_id
 	- title	(varchar)
 	- description (text)
-	- location (not sure yet) [but it should save a location form google maps]
+	- location_latitude  (not sure yet) [but it should save a location form google maps]
+	- location_longitude
 	- Municipality (varchar)
 	- Street (varchar)
 	- type (Enum[road, accident, others])
+	- status (Enum[open, in progress, closed])
 2- News
 	- title
 	- body
-	- thumbnail
 3- Services
 	- name
+	- description
 4- Requests
-	- first_name
-	- middle_name
-	- last_name
+    - user_id
+    - request_status (Enum[pending, approved, rejected])
+    - first_name
+    - middle_name
+    - last_name
 	- type (Enum[License, permit])
+
 5- Services_Ratings
-6- votings
+    - user_id
+    - service_id
+    - rating Enum[bad, good, Excellent]
+    - review
+
+
+6- reports_voting
+    - user_id
+    - report_id
+
 
 
 

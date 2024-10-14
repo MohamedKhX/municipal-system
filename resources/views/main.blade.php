@@ -1,5 +1,6 @@
 <x-app-layout>
 
+    {{-- Start Main Section --}}
     <section class="home-banner ptb-100 footer">
         <div class="container">
             <div class="row align-items-center">
@@ -20,7 +21,9 @@
             </div>
         </div>
     </section>
+    {{-- End Main Section --}}
 
+    {{-- Start Reports Section --}}
     <section class="reports ptb-100 bg-f9fbfe">
         <div class="container">
             <div class="default-section-title default-section-title-middle">
@@ -29,68 +32,32 @@
             </div>
             <div class="section-content">
                 <div class="row justify-content-center">
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="blog-card">
-                            <div class="blog-card-img">
-                                <a href="blog-details.html"><img style="height: 300px !important;" src="https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cG90aG9sZSUyMGluJTIwdGhlJTIwcm9hZHxlbnwwfHwwfHx8MA%3D%3D" alt="image"></a>
-                            </div>
-                            <div class="blog-card-text-area">
-                                <div class="blog-date">
-                                    <ul>
-                                        <li><i class="far fa-calendar-alt"></i> 01 نوفمبر 2024</li>
-                                    </ul>
-                                </div>
-                                <h4><a href="blog-details.html">بلاغ عن حفرة في الطريق</a></h4>
-                                <p>تم تقديم بلاغ عن وجود حفرة كبيرة في أحد الشوارع الرئيسية، تتطلب التدخل العاجل.</p>
-                                <a class="read-more-btn" href="blog-details.html">اقرأ المزيد</a>
-                            </div>
+                    @foreach($reports as $report)
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <x-card link=""
+                                    :img="$report->getMedia('thumbnails')->first()?->getUrl()"
+                                    :created_at="$report->created_at->diffForHumans()"
+                                    :title="$report->title"
+                                    :description="$report->description"
+                            />
                         </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="blog-card">
-                            <div class="blog-card-img">
-                                <a href="blog-details.html"><img style="height: 300px !important;" src="https://images.unsplash.com/photo-1620631049586-2670d39a1cef?q=80&w=2586&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image"></a>
-                            </div>
-                            <div class="blog-card-text-area">
-                                <div class="blog-date">
-                                    <ul>
-                                        <li><i class="far fa-calendar-alt"></i> 02 نوفمبر 2024</li>
-                                    </ul>
-                                </div>
-                                <h4><a href="blog-details.html">بلاغ عن تسرب مياه</a></h4>
-                                <p>بلاغ بوجود تسرب مياه في أحد الأحياء السكنية، تم إرسال الفريق المختص للتحقق من الأمر.</p>
-                                <a class="read-more-btn" href="blog-details.html">اقرأ المزيد</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="blog-card">
-                            <div class="blog-card-img">
-                                <a href="blog-details.html"><img style="height: 300px !important;" src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image"></a>
-                            </div>
-                            <div class="blog-card-text-area">
-                                <div class="blog-date">
-                                    <ul>
-                                        <li><i class="far fa-calendar-alt"></i> 03 نوفمبر 2024</li>
-                                    </ul>
-                                </div>
-                                <h4><a href="blog-details.html">بلاغ عن نفايات غير مرفوعة</a></h4>
-                                <p>تم تقديم بلاغ عن تراكم النفايات في منطقة معينة، جارٍ التنسيق لرفعها بأسرع وقت ممكن.</p>
-                                <a class="read-more-btn" href="blog-details.html">اقرأ المزيد</a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a class="default-button mt-4" href="about.html">المزيد</a>
                 </div>
             </div>
         </div>
     </section>
+    {{-- End Reports Section --}}
 
+    {{-- Start License and permits Section --}}
     <section class="about pb-100 pt-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-                    <div class="about-img">
-                        <img class="a-img-1" src="assets/images/about/a1.jpg" alt="image">
+                    <div class="about-img d-flex justify-content-center align-items-center">
+                        <img class="a-img-1" src="{{ asset('images/license.webp') }}" alt="image">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12 col-12">
@@ -115,7 +82,9 @@
             </div>
         </div>
     </section>
+    {{-- End License and permits Section --}}
 
+    {{-- Start News Section --}}
     <section class="blog ptb-100 bg-f9fbfe">
         <div class="container">
             <div class="default-section-title default-section-title-middle">
@@ -125,62 +94,23 @@
             </div>
             <div class="section-content">
                 <div class="row justify-content-center">
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="blog-card">
-                            <div class="blog-card-img">
-                                <a href="blog-details.html"><img src="assets/images/blog/b1.jpg" alt="image"></a>
-                            </div>
-                            <div class="blog-card-text-area">
-                                <div class="blog-date">
-                                    <ul>
-                                        <li><i class="far fa-calendar-alt"></i> 01 نوفمبر 2024</li>
-                                    </ul>
-                                </div>
-                                <h4><a href="blog-details.html">الاستجابة لنصائح المواطنين</a></h4>
-                                <p>لوريم إيبسوم دولور أميت ماغنا سيت دولور سيت أميت كونسيكتيتور أديبيسكنغ دو إيليت لابوري.</p>
-                                <a class="read-more-btn" href="blog-details.html">اقرأ المزيد</a>
-                            </div>
+                    @foreach($posts as $post)
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <x-card link=""
+                                    :img="$post->getMedia('thumbnails')->first()?->getUrl()"
+                                    :created_at="$post->created_at->diffForHumans()"
+                                    :title="$post->title"
+                                    :description="$post->body"
+                            />
                         </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="blog-card">
-                            <div class="blog-card-img">
-                                <a href="blog-details.html"><img src="assets/images/blog/b2.jpg" alt="image"></a>
-                            </div>
-                            <div class="blog-card-text-area">
-                                <div class="blog-date">
-                                    <ul>
-                                        <li><i class="far fa-calendar-alt"></i> 02 نوفمبر 2024</li>
-                                    </ul>
-                                </div>
-                                <h4><a href="blog-details.html">برنامج مستشاري الإسكان</a></h4>
-                                <p>لوريم إيبسوم دولور أميت ماغنا سيت دولور سيت أميت كونسيكتيتور أديبيسكنغ دو إيليت لابوري.</p>
-                                <a class="read-more-btn" href="blog-details.html">اقرأ المزيد</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="blog-card">
-                            <div class="blog-card-img">
-                                <a href="blog-details.html"><img src="assets/images/blog/b3.jpg" alt="image"></a>
-                            </div>
-                            <div class="blog-card-text-area">
-                                <div class="blog-date">
-                                    <ul>
-                                        <li><i class="far fa-calendar-alt"></i> 03 نوفمبر 2024</li>
-                                    </ul>
-                                </div>
-                                <h4><a href="blog-details.html">الاستجابة للتقرير الوطني</a></h4>
-                                <p>لوريم إيبسوم دولور أميت ماغنا سيت دولور سيت أميت كونسيكتيتور أديبيسكنغ دو إيليت لابوري.</p>
-                                <a class="read-more-btn" href="blog-details.html">اقرأ المزيد</a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </section>
+    {{-- End News Section --}}
 
+    {{-- Start Footer Section --}}
     <section class="footer">
         <div class="container">
             <div class="footer-content ptb-100">
@@ -253,6 +183,7 @@
 
         </div>
     </section>
+    {{-- End Footer Section --}}
 
     <div class="popup">
         <div class="popup-content">

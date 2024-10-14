@@ -2,6 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Municipality;
+use App\Models\News;
+use App\Models\Report;
+use App\Models\Request;
+use App\Models\RequestType;
+use App\Models\Service;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +19,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        \Artisan::call('permission:seed');
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        Municipality::factory()->create([
+            'name' => 'سوق الجمعة'
         ]);
+
+        $user = User::factory()->create([
+            'email' => 'admin@admin.com',
+            'password' => \Hash::make('password'),
+            'municipality_id' => 1
+        ]);
+
+        $user->assignRole('admin');
+
+        $this->call(NewsSeeder::class);
+        $this->call(ServiceSeeder::class);
+        $this->call(ReportSeeder::class);
+        $this->call(RequestTypeSeeder::class);
+        $this->call(RequestSeeder::class);
     }
+
 }
