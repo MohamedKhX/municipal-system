@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use App\Enums\ReportStatus;
-use App\Enums\ReportType;
+use http\Exception\BadConversionException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -20,8 +21,17 @@ class Report extends Model implements HasMedia
 
     protected $casts = [
       'status' => ReportStatus::class,
-      'type' => ReportType::class,
     ];
+
+    public function reportType(): BelongsTo
+    {
+        return $this->belongsTo(ReportType::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function registerMediaConversions(?Media $media = null): void
     {

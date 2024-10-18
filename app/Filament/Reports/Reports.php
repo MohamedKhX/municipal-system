@@ -3,7 +3,6 @@
 namespace App\Filament\Reports;
 
 use App\Enums\ReportStatus;
-use App\Enums\ReportType;
 use EightyNine\Reports\Components\Text;
 use EightyNine\Reports\Report;
 use EightyNine\Reports\Components\Body;
@@ -47,10 +46,9 @@ class Reports extends Report
                                     ->label("Street")
                                     ->translateLabel(),
 
-                                Body\TextColumn::make("type")
+                                Body\TextColumn::make("reportType")
                                     ->label("Type")
                                     ->translateLabel()
-                                    ->formatStateUsing(fn($state) => ReportType::tryFrom($state)->translate())
                                     ->badge(),
 
                                 Body\TextColumn::make("status")

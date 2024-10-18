@@ -3,7 +3,8 @@
 namespace Database\Factories;
 
 use App\Enums\ReportStatus;
-use App\Enums\ReportType;
+
+use App\Models\ReportType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,9 +25,9 @@ class ReportFactory extends Factory
             'location_latitude' => fake()->latitude(),
             'location_longitude' => fake()->longitude(),
             'street' => fake()->streetAddress(),
-            'type' => fake()->randomElement(ReportType::values()),
             'status' => fake()->randomElement(ReportStatus::values()),
 
+            'report_type_id' => fake()->randomElement([1,2,3,4,5,6,7,8,9]),
             'user_id' => 1,
             'municipality_id' => 1
         ];

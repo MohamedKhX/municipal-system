@@ -173,6 +173,7 @@ return [
 
     'attributes' => [
         'name'                  => 'الاسم',
+        'middle_name'           => 'اسم الأب',
         'username'              => 'اسم المُستخدم',
         'email'                 => 'البريد الالكتروني',
         'first_name'            => 'الاسم',
@@ -180,6 +181,8 @@ return [
         'password'              => 'كلمة المرور',
         'password_confirmation' => 'تأكيد كلمة المرور',
         'city'                  => 'المدينة',
+        'phone_number'          => 'رقم الهاتف',
+        'national_number'       => 'رقم الوطني',
         'country'               => 'الدولة',
         'address'               => 'العنوان',
         'phone'                 => 'الهاتف',

@@ -20,6 +20,7 @@ return new class extends Migration
 
             $table->string('subject', 100);
             $table->text('message');
+            $table->text('response')->nullable();
 
             $table->enum('status', \App\Enums\RequestStatus::values())
                 ->default(RequestStatus::Pending);

@@ -96,8 +96,8 @@
                 <div class="row justify-content-center">
                     @foreach($posts as $post)
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <x-card link=""
-                                    :img="$post->getMedia('thumbnails')->first()?->getUrl()"
+                            <x-card :link="route('news.show', $post->id)"
+                                    :img="$post->thumbnail"
                                     :created_at="$post->created_at->diffForHumans()"
                                     :title="$post->title"
                                     :description="$post->body"
@@ -110,95 +110,63 @@
     </section>
     {{-- End News Section --}}
 
-    {{-- Start Footer Section --}}
-    <section class="footer">
+    {{-- Start Services Section --}}
+    <section class="events pt-100 pb-100">
         <div class="container">
-            <div class="footer-content ptb-100">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <div class="footer-logo-area">
-                            <a href="index.html"><img src="assets/images/white-logo.png" alt="image"></a>
-                            <p>لوريم إيبسوم دولور سيت أميت، كونسيكتيتور أديبيسكنغ إيليت، تيمبور إنكيديدونت أوت لابوري
-                                إت دولوري ماغنا أليكوا كونسيكتيتور أديبيسكنغ إيليت سيد دو لابور.</p>
-                            <div class="footer-social-area">
+            <div class="default-section-title default-section-title-middle mt-10">
+                <h3>خدماتنا</h3>
+                <p>نقدم مجموعة متنوعة من الخدمات لتلبية احتياجات المجتمع، من إدارة البنية التحتية إلى تسهيل الحصول على التراخيص والتصاريح، بهدف تحسين جودة الحياة وتيسير التعاملات.</p>
+            </div>
+            <div class="section-content">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="events-card">
+                            <img src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8anVuayUyMGNsZWFufGVufDB8fDB8fHww" alt="image">
+                            <div class="events-card-text">
                                 <ul>
-                                    <li><span>تابعنا: </span></li>
-                                    <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                                    <li><a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                    <li>Conference</li>
+                                    <li>Oct 12, 2024</li>
                                 </ul>
+                                <h4><a href="event-details.html">Annual Conference 2024</a></h4>
+                                <p><i class="fas fa-map-marker-alt"></i> <a href="https://goo.gl/maps/QTg39qSWoB5fdndT7">At City Center, 27 Division Street, USA</a></p>
+                                <a class="read-more-btn" href="event-details.html">Read More</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <div class="footer-links footer-contact">
-                            <h3>تواصل معنا</h3>
-                            <div class="footer-contact-card">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <h5>الموقع: </h5>
-                                <p><a href="https://goo.gl/maps/bc3qza49szqGNZt86" target="_blank">2976 طريق شروق الشمس، لاس فيغاس</a></p>
-                            </div>
-                            <div class="footer-contact-card">
-                                <i class="fas fa-envelope"></i>
-                                <h5>البريد الإلكتروني: </h5>
-                                <p><a href="../../cdn-cgi/l/email-protection.html#83ebe6efefecc3eee6e7f9ecade0ecee"><span
-                                            class="__cf_email__" data-cfemail="e68e838a8a89a68b83829c89c885898b">[البريد الإلكتروني محمي]</span></a>
-                                </p>
-                            </div>
-                            <div class="footer-contact-card">
-                                <i class="fas fa-phone-alt"></i>
-                                <h5>الهاتف: </h5>
-                                <p><a href="tel:+13454567877">+1-3454-5678-77</a></p>
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="events-card">
+                            <img src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8anVuayUyMGNsZWFufGVufDB8fDB8fHww" alt="image">
+                            <div class="events-card-text">
+                                <ul>
+                                    <li>Conference</li>
+                                    <li>Apr 13, 2024</li>
+                                </ul>
+                                <h4><a href="event-details.html">Negotiation In Government</a></h4>
+                                <p><i class="fas fa-map-marker-alt"></i> <a href="https://goo.gl/maps/QTg39qSWoB5fdndT7">At City Center, 27 Division Street, USA</a></p>
+                                <a class="read-more-btn" href="event-details.html">Read More</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <div class="footer-links footer-quick-links">
-                            <h3>روابط سريعة</h3>
-                            <ul>
-                                <li><i class="fas fa-angle-right"></i> <a href="services.html">خدمة حكومية</a></li>
-                                <li><i class="fas fa-angle-right"></i> <a
-                                        href="https://templates.hibootstrap.com/medzo/default/tetrms.html">الشروط و الأحكام</a></li>
-                                <li><i class="fas fa-angle-right"></i> <a href="privacy.html">سياسة الخصوصية</a></li>
-                                <li><i class="fas fa-angle-right"></i> <a href="privacy.html">الوصول</a></li>
-                                <li><i class="fas fa-angle-right"></i> <a href="events.html">الفعاليات الأخيرة</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <div class="footer-links footer-newsletter">
-                            <h3>اشترك</h3>
-                            <p>اشترك في نشرتنا الإخبارية للحصول على آخر التحديثات والأخبار!</p>
-                            <form class="newsletter-form" data-toggle="validator">
-                                <input type="email" class="input-newsletter form-control" placeholder="بريدك الإلكتروني"
-                                       name="EMAIL" required autocomplete="off">
-                                <button class="default-button news-btn">اشترك الآن</button>
-                                <div id="validator-newsletter" class="form-result"></div>
-                            </form>
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="events-card">
+                            <img src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8anVuayUyMGNsZWFufGVufDB8fDB8fHww" alt="image">
+                            <div class="events-card-text">
+                                <ul>
+                                    <li>Conference</li>
+                                    <li>Apr 14, 2024</li>
+                                </ul>
+                                <h4><a href="event-details.html">Annual Health Conference</a></h4>
+                                <p><i class="fas fa-map-marker-alt"></i> <a href="https://goo.gl/maps/QTg39qSWoB5fdndT7">At City Center, 27 Division Street, USA</a></p>
+                                <a class="read-more-btn" href="event-details.html">Read More</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
-    {{-- End Footer Section --}}
+    {{-- End Services Section --}}
 
-    <div class="popup">
-        <div class="popup-content">
-            <button class="close-btn" id="popup-close"><i class="fas fa-times"></i></button>
-            <form>
-                <div class="input-group search-box">
-                    <input type="text" class="form-control" placeholder="Search">
-                    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
-        </div>
-    </div>
 
-    <div class="go-top">
-        <i class="fas fa-chevron-up"></i>
-    </div>
 
 </x-app-layout>

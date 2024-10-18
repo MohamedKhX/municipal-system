@@ -18,10 +18,11 @@ return new class extends Migration
             $table->decimal('location_latitude', 12, 8);
             $table->decimal('location_longitude', 12, 8);
             $table->string('street', 100);
-            $table->enum('type', \App\Enums\ReportType::values());
+
             $table->enum('status', \App\Enums\ReportStatus::values())
                 ->default(\App\Enums\ReportStatus::Open);
 
+            $table->foreignId('report_type_id')->references('id')->on('report_types');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('municipality_id')->references('id')->on('municipalities');
             $table->timestamps();

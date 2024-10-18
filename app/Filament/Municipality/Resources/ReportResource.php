@@ -37,11 +37,10 @@ class ReportResource extends Resource
                     ->label('Street')
                     ->translateLabel(),
 
-                Tables\Columns\TextColumn::make('type')
+                Tables\Columns\TextColumn::make('reportType.name')
                     ->label('Type')
                     ->translateLabel()
-                    ->badge()
-                    ->formatStateUsing(fn($state) => $state->translate()),
+                    ->badge(),
 
                 Tables\Columns\TextColumn::make('status')
                     ->label('Status')

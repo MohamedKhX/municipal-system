@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Image\Enums\Fit;
@@ -23,5 +24,10 @@ class News extends Model implements HasMedia
             ->performOnCollections('thumbnails')
             ->fit(Fit::Contain, 368, 232)
             ->nonQueued();
+    }
+
+    public function thumbnail(): Attribute
+    {
+        return Attribute::get(fn() => $this->getMedia('thumbnail')->first()?->getUrl());
     }
 }

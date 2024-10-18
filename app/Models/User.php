@@ -6,6 +6,8 @@ namespace App\Models;
 use App\Enums\UserType;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -59,9 +61,24 @@ class User extends Authenticatable
         ];
     }
 
-
     public function name(): Attribute
     {
         return Attribute::get(fn() => $this->first_name . ' ' . $this->last_name);
+    }
+
+    public function municipality(): BelongsTo
+    {
+        return $this->belongsTo(Municipality::class);
+    }
+
+    public function serviceRatings(): HasMany
+    {
+        return $this->hasMany(ServiceRating::class);
+    }
+
+    public function hasRating(Service $service): bool
+    {
+        // DATABASE -> user_id = $this->Id, & , service_id = $service->id
+        return $this->serviceRatings()->where('service_id', $service->id)->get()->isNotEmpty();
     }
 }

@@ -9,6 +9,7 @@ use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -37,7 +38,7 @@ class NewsResource extends Resource
                             ->minLength(5)
                             ->maxLength(100),
 
-                        RichEditor::make('body')
+                        Textarea::make('body')
                             ->label('Content')
                             ->translateLabel()
                             ->required()
