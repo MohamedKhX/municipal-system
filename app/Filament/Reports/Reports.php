@@ -46,10 +46,6 @@ class Reports extends Report
                                     ->label("Street")
                                     ->translateLabel(),
 
-                                Body\TextColumn::make("reportType")
-                                    ->label("Type")
-                                    ->translateLabel()
-                                    ->badge(),
 
                                 Body\TextColumn::make("status")
                                     ->label("Status")
@@ -64,7 +60,7 @@ class Reports extends Report
                                     $query = \App\Models\Report::query();
 
                                     return $query
-                                        ->select("title", 'street', 'type', 'status')
+                                        ->select("title", 'street',  'status')
                                         ->take(10)
                                         ->get();
                                 }

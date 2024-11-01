@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\ReportStatus;
 use http\Exception\BadConversionException;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -40,5 +41,15 @@ class Report extends Model implements HasMedia
             ->performOnCollections('thumbnails')
             ->fit(Fit::Contain, 368, 232)
             ->nonQueued();
+    }
+
+    public function thumbnail(): Attribute
+    {
+        return Attribute::get(fn() => $this->getMedia('thumbnails')->first()?->getUrl());
+    }
+
+    public function images(): Attribute
+    {
+        return Attribute::get(fn() => $this->getMedia('media'));
     }
 }

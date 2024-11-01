@@ -1,4 +1,39 @@
 <x-app-layout>
+    @push('styles')
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+              integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+              crossorigin=""/>
+
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+                crossorigin=""></script>
+        <style>
+            #map { height: 580px; }
+        </style>
+    @endpush
+
+    @push('scripts')
+            <script>
+                var map = L.map('map').setView([32.8874397, 13.21489], 13);
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+
+                @foreach($reportsLocation as $location)
+                    var marker = L.marker([{{ $location->location_latitude }}, {{ $location->location_longitude }}], {
+                        title: '{{ $location->title }}',
+                        riseOnHover: true,
+                    }).addTo(map);
+
+                // Add a click event to the marker
+                marker.on('click', function() {
+                    var url = "{{ route('reports.show', $location->id) }}"; // You can use a dynamic URL if needed
+                    window.open(url, '_blank'); // Open URL in a new tab
+                });
+                @endforeach
+            </script>
+    @endpush
 
     {{-- Start Main Section --}}
     <section class="home-banner ptb-100 footer">
@@ -15,7 +50,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="home-banner-area">
-                        <img src="https://scontent.fmji3-1.fna.fbcdn.net/v/t39.30808-6/311662218_3216886508641706_1499843151251689716_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=zDhDHM1Oi0AQ7kNvgEn1j64&_nc_ht=scontent.fmji3-1.fna&_nc_gid=AwLyQdvx5Wc7hnbpe1JBBad&oh=00_AYB9TMqtA3qSdt0HDaeL23f_hUt6fepkVPpQT6SVGlnlKg&oe=670EB80B" alt="image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/85/Libya_5101_Fozzigiaren_Arch_Tadrart_Acacus_Luca_Galuzzi_2007.jpg" alt="image">
                     </div>
                 </div>
             </div>
@@ -27,15 +62,15 @@
     <section class="reports ptb-100 bg-f9fbfe">
         <div class="container">
             <div class="default-section-title default-section-title-middle">
-                <h3>البلاغات البلدية</h3>
+                <h3>بلاغات البلدية</h3>
                 <p>هنا تجد أحدث البلاغات المتعلقة بالخدمات البلدية والمشاكل التي تحتاج إلى المتابعة. تساهم هذه البلاغات في تحسين مستوى الخدمة ومعالجة القضايا في الوقت المناسب.</p>
             </div>
             <div class="section-content">
                 <div class="row justify-content-center">
                     @foreach($reports as $report)
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <x-card link=""
-                                    :img="$report->getMedia('thumbnails')->first()?->getUrl()"
+                            <x-card :link="route('reports.show', $report->id)"
+                                    :img="$report->thumbnail"
                                     :created_at="$report->created_at->diffForHumans()"
                                     :title="$report->title"
                                     :description="$report->description"
@@ -44,7 +79,18 @@
                     @endforeach
                 </div>
                 <div class="d-flex justify-content-center">
-                    <a class="default-button mt-4" href="about.html">المزيد</a>
+                    <a class="default-button mt-4" href="{{ route('reports.index') }}">المزيد</a>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 100px" class="container">
+            <div class="default-section-title default-section-title-middle">
+                <h3>البلاغات على الخريطة</h3>
+            </div>
+            <div class="section-content">
+                <div class="row justify-content-center">
+                    <div id="map"></div>
                 </div>
             </div>
         </div>
@@ -75,7 +121,7 @@
                                 <li>ضمان الامتثال الكامل للأنظمة واللوائح.</li>
                                 <li>دعم المجتمع المحلي بتوفير خدمات ذات كفاءة عالية.</li>
                             </ul>
-                            <a class="default-button mt-4" href="about.html">تعرف على المزيد</a>
+                            <a class="default-button mt-4" href="{{ route('requests') }}">تعرف على المزيد</a>
                         </div>
                     </div>
                 </div>
@@ -119,48 +165,11 @@
             </div>
             <div class="section-content">
                 <div class="row justify-content-center">
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="events-card">
-                            <img src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8anVuayUyMGNsZWFufGVufDB8fDB8fHww" alt="image">
-                            <div class="events-card-text">
-                                <ul>
-                                    <li>Conference</li>
-                                    <li>Oct 12, 2024</li>
-                                </ul>
-                                <h4><a href="event-details.html">Annual Conference 2024</a></h4>
-                                <p><i class="fas fa-map-marker-alt"></i> <a href="https://goo.gl/maps/QTg39qSWoB5fdndT7">At City Center, 27 Division Street, USA</a></p>
-                                <a class="read-more-btn" href="event-details.html">Read More</a>
-                            </div>
+                    @foreach($services as $service)
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <x-service-card :service="$service" />
                         </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="events-card">
-                            <img src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8anVuayUyMGNsZWFufGVufDB8fDB8fHww" alt="image">
-                            <div class="events-card-text">
-                                <ul>
-                                    <li>Conference</li>
-                                    <li>Apr 13, 2024</li>
-                                </ul>
-                                <h4><a href="event-details.html">Negotiation In Government</a></h4>
-                                <p><i class="fas fa-map-marker-alt"></i> <a href="https://goo.gl/maps/QTg39qSWoB5fdndT7">At City Center, 27 Division Street, USA</a></p>
-                                <a class="read-more-btn" href="event-details.html">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="events-card">
-                            <img src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8anVuayUyMGNsZWFufGVufDB8fDB8fHww" alt="image">
-                            <div class="events-card-text">
-                                <ul>
-                                    <li>Conference</li>
-                                    <li>Apr 14, 2024</li>
-                                </ul>
-                                <h4><a href="event-details.html">Annual Health Conference</a></h4>
-                                <p><i class="fas fa-map-marker-alt"></i> <a href="https://goo.gl/maps/QTg39qSWoB5fdndT7">At City Center, 27 Division Street, USA</a></p>
-                                <a class="read-more-btn" href="event-details.html">Read More</a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

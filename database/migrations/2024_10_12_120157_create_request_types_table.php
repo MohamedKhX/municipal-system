@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->enum('type', \App\Enums\RequestType::values());
             $table->string('name', 100);
-            $table->text('requirements');
+            $table->json('requirements')->nullable();
 
             $table->foreignId('municipality_id')->references('id')->on('municipalities');
             $table->timestamps();

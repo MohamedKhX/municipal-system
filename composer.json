@@ -12,7 +12,8 @@
         "filament/spatie-laravel-media-library-plugin": "^3.2",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
-        "ryangjchandler/blade-tabler-icons": "^2.3"
+        "ryangjchandler/blade-tabler-icons": "^2.3",
+        "spatie/livewire-filepond": "^1.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

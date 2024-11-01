@@ -93,10 +93,10 @@
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav justify-content-center flex-grow-1">
                                 <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">الصفحة الرئيسية</a></li>
-                                <li class="nav-item"><a href="contact.html" class="nav-link">البلاغات</a></li>
-                                <li class="nav-item"><a href="contact.html" class="nav-link">الأخبار</a></li>
-                                <li class="nav-item"><a href="contact.html" class="nav-link">الخدمات</a></li>
-                                <li class="nav-item"><a href="contact.html" class="nav-link">التراخيص والتصاريح</a></li>
+                                <li class="nav-item"><a href="{{ route('reports.index') }}" class="nav-link">البلاغات</a></li>
+                                <li class="nav-item"><a href="{{ route('news.index') }}" class="nav-link">الأخبار</a></li>
+                                <li class="nav-item"><a href="{{ route('services.index') }}" class="nav-link">الخدمات</a></li>
+                                <li class="nav-item"><a href="{{ route('requests') }}" class="nav-link">التراخيص والتصاريح</a></li>
                             </ul>
                             <div class="menu-sidebar">
                                 <ul class="navbar-nav">
@@ -140,7 +140,7 @@
             <div class="container">
                 <div class="footer-content ptb-100">
                     <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                             <div class="footer-logo-area">
                                 <a href="index.html"><img src="assets/images/white-logo.png" alt="image"></a>
                                 <p>لوريم إيبسوم دولور سيت أميت، كونسيكتيتور أديبيسكنغ إيليت، تيمبور إنكيديدونت أوت لابوري
@@ -156,19 +156,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                             <div class="footer-links footer-contact">
                                 <h3>تواصل معنا</h3>
                                 <div class="footer-contact-card">
                                     <i class="fas fa-map-marker-alt"></i>
                                     <h5>الموقع: </h5>
-                                    <p><a href="https://goo.gl/maps/bc3qza49szqGNZt86" target="_blank">2976 طريق شروق الشمس، لاس فيغاس</a></p>
+                                    <p>
+                                        <a href="">بجانب سوق الشط</a>
+                                    </p>
                                 </div>
                                 <div class="footer-contact-card">
                                     <i class="fas fa-envelope"></i>
                                     <h5>البريد الإلكتروني: </h5>
-                                    <p><a href="../../cdn-cgi/l/email-protection.html#83ebe6efefecc3eee6e7f9ecade0ecee"><span
-                                                class="__cf_email__" data-cfemail="e68e838a8a89a68b83829c89c885898b">[البريد الإلكتروني محمي]</span></a>
+                                    <p>
+                                        <a href="">example@example.com</a>
                                     </p>
                                 </div>
                                 <div class="footer-contact-card">
@@ -178,31 +180,34 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                             <div class="footer-links footer-quick-links">
                                 <h3>روابط سريعة</h3>
                                 <ul>
-                                    <li><i class="fas fa-angle-right"></i> <a href="services.html">خدمة حكومية</a></li>
-                                    <li><i class="fas fa-angle-right"></i> <a
-                                            href="https://templates.hibootstrap.com/medzo/default/tetrms.html">الشروط و الأحكام</a></li>
-                                    <li><i class="fas fa-angle-right"></i> <a href="privacy.html">سياسة الخصوصية</a></li>
-                                    <li><i class="fas fa-angle-right"></i> <a href="privacy.html">الوصول</a></li>
-                                    <li><i class="fas fa-angle-right"></i> <a href="events.html">الفعاليات الأخيرة</a></li>
+                                    <li>
+                                        <i class="fas fa-angle-right"></i>
+                                        <a href="{{ route('home') }}">الصفحة الرئيسية</a>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-angle-right"></i>
+                                        <a href="{{ route('reports.index') }}">البلاغات</a>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-angle-right"></i>
+                                        <a href="{{ route('news.index') }}">الاخبار</a>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-angle-right"></i>
+                                        <a href="{{ route('services.index') }}">الخدمات</a>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-angle-right"></i>
+                                        <a href="{{ route('requests') }}">التراخيص والتصاريح</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                            <div class="footer-links footer-newsletter">
-                                <h3>اشترك</h3>
-                                <p>اشترك في نشرتنا الإخبارية للحصول على آخر التحديثات والأخبار!</p>
-                                <form class="newsletter-form" data-toggle="validator">
-                                    <input type="email" class="input-newsletter form-control" placeholder="بريدك الإلكتروني"
-                                           name="EMAIL" required autocomplete="off">
-                                    <button class="default-button news-btn">اشترك الآن</button>
-                                    <div id="validator-newsletter" class="form-result"></div>
-                                </form>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
 
@@ -231,6 +236,6 @@
         <script src=" {{ asset('js/odometer.min.js') }} "></script>
         <script src=" {{ asset('js/custom.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+        @stack('scripts')
     </body>
 </html>

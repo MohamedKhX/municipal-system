@@ -8,6 +8,7 @@ use App\Models\Report;
 use App\Models\RequestType;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
@@ -43,11 +44,18 @@ class RequestTypeResource extends Resource
                             ->options(\App\Enums\RequestType::getTranslations())
                             ->required(),
 
-                        RichEditor::make('requirements')
-                            ->label('Requirements')
-                            ->translateLabel()
-                            ->required()
-                            ->minLength(5),
+                        Repeater::make('requirements')
+                            ->label(__('Requirements'))
+                            ->schema([
+                                TextInput::make('item')
+                                    ->label('')
+                                    ->required()
+                                    ->minLength(3)
+                                    ->maxLength(255),
+                            ])
+                            ->grid(3)
+                            ->defaultItems(2)
+                        ,
 
                         SpatieMediaLibraryFileUpload::make('thumbnail')
                             ->conversion('thumbnail')

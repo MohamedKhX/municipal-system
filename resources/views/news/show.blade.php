@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="blog-details-text-area details-text-area">
-                        <img src="{{ $post->getMedia('thumbnail')->first()?->getUrl() }}" alt="image">
+                        <img src="{{ $post->thumbnail }}" alt="image">
                         <div class="blog-date">
                             <ul>
                                 <li><i class="far fa-calendar-alt"></i> {{ $post->created_at->diffForHumans() }} </li>
@@ -28,10 +28,9 @@
                         <div class="social-icons">
                             <ul>
                                 <li><span>شارك:</span></li>
-                                <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(request()->fullUrl()) }}&title={{ $post->id }}" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}&text={{ $post->id }}" target="_blank"><i class="fab fa-twitter"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -43,7 +42,7 @@
                             @foreach($latestPosts as $post)
                                 <div class="recent-news-card">
                                     <a href="{{ route('news.show', $post->id) }}">
-                                        <img src="{{ $post->thumbnail }}" alt="image">
+                                        <img style="height: 70px !important; object-fit: cover" width="100" src="{{ $post->thumbnail }}" alt="image">
                                     </a>
                                     <h5><a href="{{ route('news.show', $post->id) }}">{{ $post->title }}</a></h5>
                                     <p>{{ $post->created_at->diffForHumans() }}</p>

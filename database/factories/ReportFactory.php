@@ -22,8 +22,8 @@ class ReportFactory extends Factory
         return [
             'title' => fake()->title(),
             'description' => fake()->paragraphs(asText: true),
-            'location_latitude' => fake()->latitude(),
-            'location_longitude' => fake()->longitude(),
+            'location_latitude' => 32.8874 + rand(-100, 100) / 10000,
+            'location_longitude' => 13.1873 + rand(-100, 100) / 10000,
             'street' => fake()->streetAddress(),
             'status' => fake()->randomElement(ReportStatus::values()),
 

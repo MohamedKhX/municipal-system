@@ -17,5 +17,6 @@ class RequestType extends Model implements HasMedia
 
     protected $casts = [
         'type' => \App\Enums\RequestType::class,
+        'requirements' => 'json'
     ];
 }

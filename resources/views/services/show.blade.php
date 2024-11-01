@@ -13,7 +13,7 @@
                 <div class="col-lg-8">
                     <div class="blog-details-text-area details-text-area">
                         <img src="{{ $service->thumbnail }}" alt="image">
-                        <h3 class="mt-0">{{ $service->name }}</h3>
+                        <h3 class="" style="margin-top: 40px">{{ $service->name }}</h3>
                         <div>
                             {!! $service->description !!}
                         </div>
@@ -29,7 +29,7 @@
                             @foreach($latestPosts as $post)
                                 <div class="recent-news-card">
                                     <a href="{{ route('news.show', $post->id) }}">
-                                        <img src="{{ $post->thumbnail }}" alt="image">
+                                        <img style="height: 70px !important; object-fit: cover" width="100" src="{{ $post->thumbnail }}" alt="image">
                                     </a>
                                     <h5><a href="{{ route('news.show', $post->id) }}">{{ $post->title }}</a></h5>
                                     <p>{{ $post->created_at->diffForHumans() }}</p>

@@ -29,15 +29,12 @@
                     <div class="blog-details-text-area details-text-area">
                         <div id="carouselExample" class="carousel slide">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img style="height: 400px; object-fit: cover" src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img style="height: 400px; object-fit: cover" src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img style="height: 400px; object-fit: cover" src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="...">
-                                </div>
+                                @foreach($report->images as $image)
+                                    <div class="carousel-item active">
+                                        <img style="height: 500px; object-fit: cover" src="{{ $image->getUrl() }}" class="d-block w-100" alt="...">
+                                    </div>
+                                @endforeach
+
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -95,10 +92,9 @@
                         <div class="social-icons">
                             <ul>
                                 <li><span>شارك:</span></li>
-                                <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(request()->fullUrl()) }}&title={{ $report->id }}" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}&text={{ $report->id }}" target="_blank"><i class="fab fa-twitter"></i></a></li>
                             </ul>
                         </div>
                     </div>

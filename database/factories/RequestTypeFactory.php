@@ -20,7 +20,6 @@ class RequestTypeFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'type' => $this->faker->randomElement(RequestStatus::values()),
-            'requirements' => $this->faker->text(),
 
             'municipality_id' => 1
 

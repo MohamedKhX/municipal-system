@@ -27,8 +27,14 @@ Route::get('/reports', [ReportsController::class, 'index'])
 Route::get('/reports/{report:id}', [ReportsController::class, 'show'])
     ->name('reports.show');
 
+Route::get('/requests', function () {
+    return view('requests');
+})->middleware(['auth'])
+    ->name('requests');
+
 
 Route::get('/test', function () {
+    dd(__('Report'));
     return view('test');
 });
 
