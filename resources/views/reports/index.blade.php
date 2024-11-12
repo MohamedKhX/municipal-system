@@ -10,10 +10,13 @@
     <section class="blog-details pt-70 pb-100">
         <div class="container">
             <div class="row">
+                <div>
+                    <a href="{{ route('reports.create') }}" class="btn btn-lg btn-success">إنشاء بلاغ</a>
+                </div>
                 @foreach($reports as $report)
                     <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
                         <x-card :link="route('reports.show', $report->id)"
-                                :img="$report->getMedia('thumbnails')->first()?->getUrl()"
+                                :img="$report->thumbnail"
                                 :created_at="$report->created_at->diffForHumans()"
                                 :title="$report->title"
                                 :description="$report->description"

@@ -4,7 +4,9 @@ namespace App\Filament\Municipality\Resources;
 
 use App\Filament\Municipality\Resources\ReportTypeResource\Pages;
 use App\Filament\Municipality\Resources\ReportTypeResource\RelationManagers;
+use App\Models\Report;
 use App\Models\ReportType;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -47,11 +49,10 @@ class ReportTypeResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
+    public static function getEloquentQuery(): Builder
     {
-        return [
-            //
-        ];
+        return ReportType::where('municipality_id', Filament::auth()->user()->municipality_id)
+            ->latest();
     }
 
     public static function getPages(): array

@@ -4,7 +4,9 @@ namespace App\Filament\Municipality\Resources;
 
 use App\Filament\Municipality\Resources\ServiceResource\Pages;
 use App\Filament\Municipality\Resources\ServiceResource\RelationManagers;
+use App\Models\ReportType;
 use App\Models\Service;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\RichEditor;
@@ -68,11 +70,10 @@ class ServiceResource extends Resource
 
     }
 
-    public static function getRelations(): array
+    public static function getEloquentQuery(): Builder
     {
-        return [
-            //
-        ];
+        return Service::where('municipality_id', Filament::auth()->user()->municipality_id)
+            ->latest();
     }
 
     public static function getPages(): array

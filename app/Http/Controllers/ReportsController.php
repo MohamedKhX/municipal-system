@@ -9,7 +9,7 @@ class ReportsController extends Controller
 {
     public function index()
     {
-        $reports = Report::paginate(6);
+        $reports = Report::latest()->paginate(6);
 
         return view('reports.index', [
             'reports' => $reports
@@ -23,5 +23,10 @@ class ReportsController extends Controller
         return view('reports.show', [
             'report' => $report,
         ]);
+    }
+
+    public function create()
+    {
+        return view('reports.create');
     }
 }

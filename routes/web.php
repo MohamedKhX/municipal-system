@@ -24,6 +24,11 @@ Route::get('/services/{service:id}', [ServicesController::class, 'show'])
 Route::get('/reports', [ReportsController::class, 'index'])
     ->name('reports.index');
 
+
+Route::get('/reports/create', [ReportsController::class, 'create'])
+    ->name('reports.create')
+    ->middleware(['auth']);
+
 Route::get('/reports/{report:id}', [ReportsController::class, 'show'])
     ->name('reports.show');
 
@@ -32,10 +37,7 @@ Route::get('/requests', function () {
 })->middleware(['auth'])
     ->name('requests');
 
-
-Route::get('/test', function () {
-    dd(__('Report'));
-    return view('test');
-});
+Route::view('/request-sent', 'request-sent')
+    ->name('request-sent');
 
 require __DIR__.'/auth.php';

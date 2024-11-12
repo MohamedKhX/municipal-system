@@ -5,7 +5,9 @@ namespace App\Filament\Municipality\Resources;
 use App\Filament\Municipality\Resources\RequestTypeResource\Pages;
 use App\Filament\Municipality\Resources\RequestTypeResource\RelationManagers;
 use App\Models\Report;
+use App\Models\ReportType;
 use App\Models\RequestType;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Repeater;
@@ -86,6 +88,12 @@ class RequestTypeResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return RequestType::where('municipality_id', Filament::auth()->user()->municipality_id)
+            ->latest();
     }
 
     public static function getPages(): array

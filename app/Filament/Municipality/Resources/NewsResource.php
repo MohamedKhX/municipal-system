@@ -5,6 +5,7 @@ namespace App\Filament\Municipality\Resources;
 use App\Filament\Municipality\Resources\NewsResource\Pages;
 use App\Filament\Municipality\Resources\NewsResource\RelationManagers;
 use App\Models\News;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\RichEditor;
@@ -75,11 +76,10 @@ class NewsResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
+    public static function getEloquentQuery(): Builder
     {
-        return [
-            //
-        ];
+        return News::where('municipality_id', Filament::auth()->user()->municipality_id)
+            ->latest();
     }
 
     public static function getPages(): array

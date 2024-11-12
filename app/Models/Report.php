@@ -45,7 +45,7 @@ class Report extends Model implements HasMedia
 
     public function thumbnail(): Attribute
     {
-        return Attribute::get(fn() => $this->getMedia('thumbnails')->first()?->getUrl());
+        return Attribute::get(fn() => $this->getMedia('media')->first()?->getUrl());
     }
 
     public function images(): Attribute

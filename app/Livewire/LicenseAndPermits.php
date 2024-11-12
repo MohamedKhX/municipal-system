@@ -23,7 +23,7 @@ class LicenseAndPermits extends Component
     #[Validate('required|min:3')]
     public string $last_name = '';
 
-    #[Validate(['photos.*' => 'image|max:1024'])]
+
     public $photos = [];
 
     #[Validate('required|min:3')]
@@ -97,6 +97,8 @@ class LicenseAndPermits extends Component
             $request->addMedia($photo)
                 ->toMediaCollection('userAttachments');
         }
+
+        $this->redirect(route('request-sent'));
     }
 
     public function render()

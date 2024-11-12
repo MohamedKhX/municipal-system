@@ -7,6 +7,7 @@ use App\Filament\Municipality\Resources\ReportResource\Pages;
 use App\Filament\Municipality\Resources\ReportResource\RelationManagers;
 use App\Models\News;
 use App\Models\Report;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -82,6 +83,12 @@ class ReportResource extends Resource
         return [
             'index' => Pages\ListReports::route('/'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return Report::where('municipality_id', Filament::auth()->user()->municipality_id)
+            ->latest();
     }
 
     public static function getLabel(): ?string

@@ -10,4 +10,9 @@ class ReportType extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function scopeCurrentMunicipality($query)
+    {
+        return $query;
+    }
 }

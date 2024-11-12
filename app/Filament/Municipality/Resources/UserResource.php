@@ -4,7 +4,9 @@ namespace App\Filament\Municipality\Resources;
 
 use App\Filament\Municipality\Resources\UserResource\Pages;
 use App\Filament\Municipality\Resources\UserResource\RelationManagers;
+use App\Models\ReportType;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
@@ -99,11 +101,10 @@ class UserResource extends Resource
             ->bulkActions([]);
     }
 
-    public static function getRelations(): array
+    public static function getEloquentQuery(): Builder
     {
-        return [
-            //
-        ];
+        return User::where('municipality_id', Filament::auth()->user()->municipality_id)
+            ->latest();
     }
 
     public static function getPages(): array

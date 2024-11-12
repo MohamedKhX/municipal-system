@@ -8,8 +8,10 @@ use App\Filament\Municipality\Resources\RequestResource\Pages;
 use App\Filament\Municipality\Resources\RequestResource\RelationManagers;
 use App\Livewire\CreateResponse;
 use App\Models\Report;
+use App\Models\ReportType;
 use App\Models\Request;
 use App\Models\Response;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
@@ -174,6 +176,12 @@ class RequestResource extends Resource
                 Tables\Actions\DeleteAction::make(),
 
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return Request::where('municipality_id', Filament::auth()->user()->municipality_id)
+            ->latest();
     }
 
     public static function getPages(): array
