@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Municipality;
 use App\Models\News;
 use App\Models\Report;
 use App\Models\Service;
@@ -9,11 +10,19 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function home()
+    public function home($municipality)
     {
-        $reports = Report::take(3)->get();
-        $services = Service::take(3)->get();
-        $posts = News::take(3)->get();
+        $reports = Report::where('municipality_id', $municipality)
+            ->take(3)
+            ->get();
+
+        $services = Service::where('municipality_id', $municipality)
+            ->take(3)
+            ->get();
+
+        $posts = News::where('municipality_id', $municipality)
+            ->take(3)
+            ->get();
 
         $reportsLocation =  Report::all();
 
@@ -21,7 +30,8 @@ class HomeController extends Controller
             'reports' => $reports,
             'posts'   => $posts,
             'reportsLocation' => $reportsLocation,
-            'services' => $services
+            'services' => $services,
+            'municipalityId' => $municipality
         ]);
     }
 }

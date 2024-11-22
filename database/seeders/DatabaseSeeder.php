@@ -21,9 +21,7 @@ class DatabaseSeeder extends Seeder
     {
         \Artisan::call('permission:seed');
 
-        Municipality::factory()->create([
-            'name' => 'سوق الجمعة'
-        ]);
+        $this->call(MunicipalitySeeder::class);
 
         $user = User::factory()->create([
             'email' => 'admin@admin.com',

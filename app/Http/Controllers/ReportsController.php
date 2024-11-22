@@ -7,16 +7,18 @@ use Illuminate\Http\Request;
 
 class ReportsController extends Controller
 {
-    public function index()
+    public function index($municipalityId)
     {
-        $reports = Report::latest()->paginate(6);
+        $reports = Report::where('municipality', $municipalityId)
+            ->latest()
+            ->paginate(6);
 
         return view('reports.index', [
             'reports' => $reports
         ]);
     }
 
-    public function show($id)
+    public function show($municipalityId, $id)
     {
         $report = Report::find($id);
 
@@ -25,8 +27,10 @@ class ReportsController extends Controller
         ]);
     }
 
-    public function create()
+    public function create($municipalityId)
     {
-        return view('reports.create');
+        return view('reports.create', [
+            'municipalityId' => $municipalityId
+        ]);
     }
 }

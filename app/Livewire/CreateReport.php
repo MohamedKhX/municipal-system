@@ -15,6 +15,8 @@ class CreateReport extends Component
     use WithFilePond;
     use WithFileUploads;
 
+    public $municipalityId;
+
     #[Validate('required')]
     public $latitude;
 
@@ -60,7 +62,7 @@ class CreateReport extends Component
             'location_latitude'  => $this->latitude,
             'location_longitude' => $this->longitude,
             'user_id'            => auth()->id(),
-            'municipality_id'    => getCurrentMunicipality()
+            'municipality_id'    => $this->municipalityId
         ]);
 
 

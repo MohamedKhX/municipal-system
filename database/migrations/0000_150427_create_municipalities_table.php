@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('municipalities', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
+            $table->json('boundary');
             $table->timestamps();
         });
     }

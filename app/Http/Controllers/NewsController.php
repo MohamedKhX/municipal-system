@@ -7,16 +7,17 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function index()
+    public function index($municipalityId)
     {
-        $news = News::paginate(6);
+        $news = News::where('municipality_id', $municipalityId)
+            ->paginate(6);
 
         return view('news.index', [
             'news' => $news
         ]);
     }
 
-    public function show($id)
+    public function show($municipalityId, $id)
     {
         $post = News::find($id);
         $latestPosts = News::take(3)->get();

@@ -92,11 +92,11 @@
                         </a>
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav justify-content-center flex-grow-1">
-                                <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">الصفحة الرئيسية</a></li>
-                                <li class="nav-item"><a href="{{ route('reports.index') }}" class="nav-link">البلاغات</a></li>
-                                <li class="nav-item"><a href="{{ route('news.index') }}" class="nav-link">الأخبار</a></li>
-                                <li class="nav-item"><a href="{{ route('services.index') }}" class="nav-link">الخدمات</a></li>
-                                <li class="nav-item"><a href="{{ route('requests') }}" class="nav-link">التراخيص والتصاريح</a></li>
+                                <li class="nav-item"><a href="{{ route('home',           getCurrentMunicipality()) }}" class="nav-link">الصفحة الرئيسية</a></li>
+                                <li class="nav-item"><a href="{{ route('reports.index',  getCurrentMunicipality()) }}" class="nav-link">البلاغات</a></li>
+                                <li class="nav-item"><a href="{{ route('news.index',     getCurrentMunicipality()) }}" class="nav-link">الأخبار</a></li>
+                                <li class="nav-item"><a href="{{ route('services.index', getCurrentMunicipality()) }}" class="nav-link">الخدمات</a></li>
+                                <li class="nav-item"><a href="{{ route('requests',       getCurrentMunicipality()) }}" class="nav-link">التراخيص والتصاريح</a></li>
                             </ul>
                             <div class="menu-sidebar">
                                 <ul class="navbar-nav">
@@ -186,23 +186,23 @@
                                 <ul>
                                     <li>
                                         <i class="fas fa-angle-right"></i>
-                                        <a href="{{ route('home') }}">الصفحة الرئيسية</a>
+                                        <a href="{{ route('home', getCurrentMunicipality()) }}">الصفحة الرئيسية</a>
                                     </li>
                                     <li>
                                         <i class="fas fa-angle-right"></i>
-                                        <a href="{{ route('reports.index') }}">البلاغات</a>
+                                        <a href="{{ route('reports.index', getCurrentMunicipality()) }}">البلاغات</a>
                                     </li>
                                     <li>
                                         <i class="fas fa-angle-right"></i>
-                                        <a href="{{ route('news.index') }}">الاخبار</a>
+                                        <a href="{{ route('news.index', getCurrentMunicipality()) }}">الاخبار</a>
                                     </li>
                                     <li>
                                         <i class="fas fa-angle-right"></i>
-                                        <a href="{{ route('services.index') }}">الخدمات</a>
+                                        <a href="{{ route('services.index', getCurrentMunicipality()) }}">الخدمات</a>
                                     </li>
                                     <li>
                                         <i class="fas fa-angle-right"></i>
-                                        <a href="{{ route('requests') }}">التراخيص والتصاريح</a>
+                                        <a href="{{ route('requests', getCurrentMunicipality()) }}">التراخيص والتصاريح</a>
                                     </li>
                                 </ul>
                             </div>

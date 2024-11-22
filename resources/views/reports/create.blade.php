@@ -12,7 +12,7 @@
     @endpush
         <section class="contact-form-area pt-100 pb-100">
             <div class="container">
-                <livewire:create-report/>
+                <livewire:create-report :municipalityId="$muncipalityId"/>
             </div>
         </section>
 

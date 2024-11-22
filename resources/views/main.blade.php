@@ -28,7 +28,7 @@
 
                 // Add a click event to the marker
                 marker.on('click', function() {
-                    var url = "{{ route('reports.show', $location->id) }}"; // You can use a dynamic URL if needed
+                    var url = "{{ route('reports.show', [$municipalityId, $location->id]) }}"; // You can use a dynamic URL if needed
                     window.open(url, '_blank'); // Open URL in a new tab
                 });
                 @endforeach
@@ -69,7 +69,7 @@
                 <div class="row justify-content-center">
                     @foreach($reports as $report)
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <x-card :link="route('reports.show', $report->id)"
+                            <x-card :link="route('reports.show', [$municipalityId, $report->id])"
                                     :img="$report->thumbnail"
                                     :created_at="$report->created_at->diffForHumans()"
                                     :title="$report->title"
@@ -79,7 +79,7 @@
                     @endforeach
                 </div>
                 <div class="d-flex justify-content-center">
-                    <a class="default-button mt-4" href="{{ route('reports.index') }}">المزيد</a>
+                    <a class="default-button mt-4" href="{{ route('reports.index', $municipalityId) }}">المزيد</a>
                 </div>
             </div>
         </div>
@@ -121,7 +121,7 @@
                                 <li>ضمان الامتثال الكامل للأنظمة واللوائح.</li>
                                 <li>دعم المجتمع المحلي بتوفير خدمات ذات كفاءة عالية.</li>
                             </ul>
-                            <a class="default-button mt-4" href="{{ route('requests') }}">تعرف على المزيد</a>
+                            <a class="default-button mt-4" href="{{ route('requests', $municipalityId) }}">تعرف على المزيد</a>
                         </div>
                     </div>
                 </div>
@@ -142,7 +142,7 @@
                 <div class="row justify-content-center">
                     @foreach($posts as $post)
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <x-card :link="route('news.show', $post->id)"
+                            <x-card :link="route('news.show', [$municipalityId,$post->id])"
                                     :img="$post->thumbnail"
                                     :created_at="$post->created_at->diffForHumans()"
                                     :title="$post->title"
@@ -167,7 +167,7 @@
                 <div class="row justify-content-center">
                     @foreach($services as $service)
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <x-service-card :service="$service" />
+                            <x-service-card :municipalityId="$municipalityId" :service="$service" />
                         </div>
                     @endforeach
                 </div>
