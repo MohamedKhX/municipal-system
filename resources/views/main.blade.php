@@ -41,7 +41,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="banner-text-area">
-                        <h6>اكتشف المدينة</h6>
+                        <h6>{{ \App\Models\Municipality::find($municipalityId)->name }}</h6>
                         <h1>نحن نطور مدينة مستدامة</h1>
                         <p>لوريم إيبسوم دولور سيت أميت، كونسيكتيتور أديبيسكنغ، فاسيليس هييندريت لوريم دولور سيت أميت ماجنا
                             نيب نيك أورنا إن نيسي نيكي أليكيت.</p>
@@ -142,7 +142,7 @@
                 <div class="row justify-content-center">
                     @foreach($posts as $post)
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <x-card :link="route('news.show', [$municipalityId,$post->id])"
+                            <x-card :link="route('news.show', [getCurrentMunicipality(),$post->id])"
                                     :img="$post->thumbnail"
                                     :created_at="$post->created_at->diffForHumans()"
                                     :title="$post->title"

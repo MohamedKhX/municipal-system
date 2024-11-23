@@ -34,6 +34,11 @@ class Report extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
+    public function municipality(): BelongsTo
+    {
+        return $this->belongsTo(Municipality::class);
+    }
+
     public function registerMediaConversions(?Media $media = null): void
     {
         $this

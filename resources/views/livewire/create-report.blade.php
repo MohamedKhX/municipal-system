@@ -8,8 +8,8 @@
 
                 <div class="contact-form-text-area">
                     <form wire:submit="submit" id="contactForm" novalidate="true">
-                        <input id="latitude"  wire:model="latitude" type="text">
-                        <input id="longitude" wire:model="longitude" type="text">
+                        <input id="latitude"  wire:model="latitude" type="hidden">
+                        <input id="longitude" wire:model="longitude" type="hidden">
 
 
                         <div class="mb-3">

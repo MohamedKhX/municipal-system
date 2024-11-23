@@ -28,10 +28,10 @@
                             <h3>آخر الأخبار</h3>
                             @foreach($latestPosts as $post)
                                 <div class="recent-news-card">
-                                    <a href="{{ route('news.show', $post->id) }}">
+                                    <a href="{{ route('news.show', [getCurrentMunicipality(),$post->id]) }}">
                                         <img style="height: 70px !important; object-fit: cover" width="100" src="{{ $post->thumbnail }}" alt="image">
                                     </a>
-                                    <h5><a href="{{ route('news.show', $post->id) }}">{{ $post->title }}</a></h5>
+                                    <h5><a href="{{ route('news.show', [getCurrentMunicipality(),$post->id]) }}">{{ $post->title }}</a></h5>
                                     <p>{{ $post->created_at->diffForHumans() }}</p>
                                 </div>
                             @endforeach

@@ -58,7 +58,7 @@
     <div class="icon">✔️</div>
     <h1>تم إرسال الطلب بنجاح!</h1>
     <p>تمت معالجة طلبك وإرساله بنجاح. سنعود إليك قريبًا.</p>
-    <a href="{{ route('home') }}" class="button">العودة إلى الصفحة الرئيسية</a>
+    <a href="{{ route('home', getCurrentMunicipality()) }}" class="button">العودة إلى الصفحة الرئيسية</a>
 </div>
 </body>
 </html>

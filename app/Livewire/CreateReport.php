@@ -72,7 +72,7 @@ class CreateReport extends Component
                 ->toMediaCollection('media');
         }
 
-        $this->redirect(route('reports.show', $report));
+        $this->redirect(route('reports.show', [getCurrentMunicipality(), $report]));
     }
     public function render()
     {

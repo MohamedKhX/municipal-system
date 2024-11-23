@@ -55,7 +55,7 @@
                                 <li style="margin-left: 8px">
                                     <i class="fa-solid fa-place-of-worship"></i>
                                     <span>بلدية</span>
-                                    <span>سوق الجمعة</span>
+                                    <span>{{ $report->municipality->name }}</span>
                                 </li>
                                 <li style="margin-left: 8px">
                                     <i class="fa-solid fa-map"></i>

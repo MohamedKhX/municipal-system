@@ -10,8 +10,10 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function home($municipality)
+    public function home($municipality = null)
     {
+        $municipality = getCurrentMunicipality();
+
         $reports = Report::where('municipality_id', $municipality)
             ->take(3)
             ->get();

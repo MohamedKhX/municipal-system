@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use function Pest\Laravel\get;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -35,7 +36,7 @@ class AuthenticatedSessionController extends Controller
             return redirect('/municipality');
         }
 
-        return redirect()->intended(route('home', absolute: false));
+        return redirect()->intended(route('home', getCurrentMunicipality(), absolute: false));
     }
 
     /**

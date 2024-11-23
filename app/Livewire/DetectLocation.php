@@ -1,6 +1,7 @@
 <?php
 namespace App\Livewire;
 
+use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
@@ -29,12 +30,12 @@ class DetectLocation extends Component
 
             // Ensure the coordinates are in the correct order [longitude, latitude]
             if ($this->isPointInPolygon($this->latitude, $this->longitude, $boundary)) {
-                dd('Found', $municipality->name);
                 return redirect()->route('home', $municipality->id);
             }
         }
-        dd('location not found');
-        session()->flash('error', 'No municipality found for the provided location.');
+
+        return redirect()->route('home', $municipality->id);
+        //session()->flash('error', 'No municipality found for the provided location.');
     }
 
     private function isPointInPolygon($lng, $lat, $polygon)

@@ -12,7 +12,7 @@
             <div class="row">
                 @foreach($news as $post)
                     <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <x-card :link="route('news.show', $post->id)"
+                        <x-card :link="route('news.show', [getCurrentMunicipality(),$post->id])"
                                 :img="$post->getMedia('thumbnails')->first()?->getUrl()"
                                 :created_at="$post->created_at->diffForHumans()"
                                 :title="$post->title"

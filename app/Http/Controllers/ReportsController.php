@@ -9,7 +9,7 @@ class ReportsController extends Controller
 {
     public function index($municipalityId)
     {
-        $reports = Report::where('municipality', $municipalityId)
+        $reports = Report::where('municipality_id', $municipalityId)
             ->latest()
             ->paginate(6);
 
