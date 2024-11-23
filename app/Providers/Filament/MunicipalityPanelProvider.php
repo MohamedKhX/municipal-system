@@ -32,7 +32,6 @@ class MunicipalityPanelProvider extends PanelProvider
             ->login()
             ->plugins([
                 ReportsPlugin::make(),
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
             ])
             ->colors([
                 'primary' => Color::Green,

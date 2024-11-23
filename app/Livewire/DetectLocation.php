@@ -19,8 +19,6 @@ class DetectLocation extends Component
 
     public function detectMunicipality($latitude, $longitude)
     {
-        $latitude = 32.8464;
-        $longitude = 13.3233;
         $this->latitude = $latitude;
         $this->longitude = $longitude;
 

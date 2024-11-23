@@ -31,12 +31,12 @@ class DatabaseSeeder extends Seeder
 
         $user->assignRole('admin');
 
-        $this->call(NewsSeeder::class);
+      /*  $this->call(NewsSeeder::class);
         $this->call(ServiceSeeder::class);
         $this->call(ReportTypeSeeder::class);
         $this->call(ReportSeeder::class);
         $this->call(RequestTypeSeeder::class);
-        $this->call(RequestSeeder::class);
+        $this->call(RequestSeeder::class);*/
     }
 
 }
