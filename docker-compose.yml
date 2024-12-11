@@ -20,6 +20,7 @@ services:
             - VITE_APP_URL=https://municipal-system.laraplay.fun
             - APP_ENV=local
             - APP_DEBUG=true
+            - APP_LOCALE=ar
             - DB_CONNECTION=mysql
             - DB_HOST=145.223.81.191
             - DB_PORT=3306
