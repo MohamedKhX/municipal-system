@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
             'type' => UserType::Employee
         ]);
 
-        $employee->assingRole('admin');
+        $employee->assignRole('admin');
 
         $this->call(NewsSeeder::class);
         $this->call(ServiceSeeder::class);
