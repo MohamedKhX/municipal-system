@@ -14,7 +14,7 @@ services:
         networks:
             - sail
         environment:
-            - APP_NAME=Municipality
+            - APP_NAME="Municipality"
             - APP_ENV=local
             - APP_KEY=base64:mXouEHDVQd6YlJ8qrZlNWLF2mDV34+ivDdAn4Y57pac=
             - APP_DEBUG=false
