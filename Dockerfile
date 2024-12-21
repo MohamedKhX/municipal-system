@@ -8,24 +8,21 @@ USER root
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs
 
-# Install PHP intl, exif, and GD extensions
+# Install PHP intl and exif extensions
 RUN apt-get update && apt-get install -y \
     libicu-dev \
     libexif-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install intl exif gd
+    && docker-php-ext-install intl exif
 
-# Ensure proper permissions for the web application
 COPY --chown=www-data:www-data . /var/www/html
 
 USER www-data
 
-# Install and build frontend dependencies
 RUN npm install
 RUN npm run build
 
 # Run Composer with --ignore-platform-req=ext-exif to avoid issues in case the extension is not required.
 RUN composer install --no-interaction --optimize-autoloader
+
+# Run migrations and seeds
+RUN php artisan migrate --force && php artisan db:seed --force
