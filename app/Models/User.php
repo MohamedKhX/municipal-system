@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserType;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,7 +14,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
+
 {
     use HasFactory, Notifiable, HasRoles;
 
@@ -80,5 +83,18 @@ class User extends Authenticatable
     {
         // DATABASE -> user_id = $this->Id, & , service_id = $service->id
         return $this->serviceRatings()->where('service_id', $service->id)->get()->isNotEmpty();
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if ($panel->getId() === 'admin' && $this->type == UserType::Admin) {
+            return true;
+        }
+
+        if ($panel->getId() === 'municipality' && $this->type == UserType::Employee) {
+            return true;
+        }
+
+        return false;
     }
 }

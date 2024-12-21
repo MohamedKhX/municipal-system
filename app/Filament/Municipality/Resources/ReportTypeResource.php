@@ -32,6 +32,9 @@ class ReportTypeResource extends Resource
                     ->required()
                     ->minLength(3)
                     ->maxLength(100),
+
+                Forms\Components\Hidden::make('municipality_id')
+                    ->default(Filament::auth()->user()->municipality_id),
             ]);
     }
 

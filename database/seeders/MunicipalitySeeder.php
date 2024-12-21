@@ -45,6 +45,19 @@ class MunicipalitySeeder extends Seeder
             ],
         ];
 
+
+        foreach ($municipalities as &$municipality) {
+            $decodedBoundary = json_decode($municipality['boundary'], true);
+            $transformedBoundary = array_map(function ($point) {
+                return [
+                    'latitude' => (string)$point[0],
+                    'longitude' => (string)$point[1],
+                ];
+            }, $decodedBoundary);
+
+            $municipality['boundary'] = json_encode($transformedBoundary);
+        }
+
         foreach ($municipalities as $data) {
             Municipality::create($data);
         }

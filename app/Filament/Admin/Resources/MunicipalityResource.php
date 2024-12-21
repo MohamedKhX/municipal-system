@@ -24,13 +24,31 @@ class MunicipalityResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->label('Name')
-                    ->translateLabel()
-                    ->required()
-                    ->minLength(5)
-                    ->maxLength(100),
-            ]);
+                Forms\Components\Fieldset::make()
+                    ->schema([
+                        TextInput::make('name')
+                            ->label('Name')
+                            ->translateLabel()
+                            ->required()
+                            ->minLength(5)
+                            ->maxLength(100),
+
+                        Forms\Components\Repeater::make('boundary')
+                            ->schema([
+                                TextInput::make('latitude')
+                                    ->label('Latitude')
+                                    ->translateLabel()
+                                    ->required()
+                                    ->numeric(),
+
+                                TextInput::make('longitude')
+                                    ->label('Longitude')
+                                    ->translateLabel()
+                                    ->required()
+                                    ->numeric(),
+                            ])
+                    ])->columns(1),
+                ])->columns(1);
     }
 
     public static function table(Table $table): Table

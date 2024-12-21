@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,6 +14,12 @@ class Municipality extends Model
 
     protected $guarded = [];
 
+    public function boundary(): Attribute
+    {
+        return Attribute::get(fn($value) => json_decode($value, true));
+    }
+
+
     public function users(): HasMany
     {
         return $this->hasMany(User::class);
@@ -23,7 +30,7 @@ class Municipality extends Model
         $municipalities = DB::table('municipalities')->get();
 
         foreach ($municipalities as $municipality) {
-            $boundary = json_decode($municipality->boundary, true);
+            $boundary = $municipality->boundary;
 
             if ($this->isPointInPolygon($latitude, $longitude, $boundary)) {
                 return $municipality->name;

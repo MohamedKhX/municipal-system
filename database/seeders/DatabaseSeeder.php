@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserType;
 use App\Models\Municipality;
 use App\Models\News;
 use App\Models\Report;
@@ -26,7 +27,8 @@ class DatabaseSeeder extends Seeder
         $user = User::factory()->create([
             'email' => 'admin@admin.com',
             'password' => \Hash::make('password'),
-            'municipality_id' => 1
+            'municipality_id' => 1,
+            'type' => UserType::Admin
         ]);
 
         $user->assignRole('admin');

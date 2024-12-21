@@ -30,8 +30,10 @@ class MunicipalityPanelProvider extends PanelProvider
             ->id('municipality')
             ->path('municipality')
             ->login()
+            ->font('rubik')
             ->plugins([
                 ReportsPlugin::make(),
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
             ])
             ->colors([
                 'primary' => Color::Green,

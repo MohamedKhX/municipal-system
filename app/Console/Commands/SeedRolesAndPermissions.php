@@ -51,6 +51,9 @@ class SeedRolesAndPermissions extends Command
         $requestTypeView    = Permission::findOrCreate('view_request_type');
         $requestTypeManage  = Permission::findOrCreate('manage_request_type');
 
+        $reportTypeView    = Permission::findOrCreate('view_report_type');
+        $reportTypeManage  = Permission::findOrCreate('manage_report_type');
+
         $admin->syncPermissions([
             $newsView,
             $newManage,
@@ -66,6 +69,8 @@ class SeedRolesAndPermissions extends Command
             $roleManage,
             $userView,
             $userManage,
+            $reportTypeView,
+            $reportTypeManage,
         ]);
     }
 }

@@ -28,14 +28,20 @@ class DetectLocation extends Component
         foreach ($municipalities as $municipality) {
             $boundary = json_decode($municipality->boundary, true);
 
+            // Convert boundary to the required format [longitude, latitude]
+            $polygon = array_map(function ($point) {
+                return [(float)$point['longitude'], (float)$point['latitude']];
+            }, $boundary);
+
             // Ensure the coordinates are in the correct order [longitude, latitude]
-            if ($this->isPointInPolygon($this->latitude, $this->longitude, $boundary)) {
+            if ($this->isPointInPolygon($this->longitude, $this->latitude, $polygon)) {
                 return redirect()->route('home', $municipality->id);
             }
         }
 
+        // If no municipality is found, handle the fallback case
+        session()->flash('error', 'No municipality found for the provided location.');
         return redirect()->route('home', $municipality->id);
-        //session()->flash('error', 'No municipality found for the provided location.');
     }
 
     private function isPointInPolygon($lng, $lat, $polygon)

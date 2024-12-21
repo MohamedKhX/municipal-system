@@ -48,6 +48,9 @@ class ServiceResource extends Resource
                             ->conversion('thumbnail')
                             ->label('Thumbnail')
                             ->translateLabel(),
+
+                        Forms\Components\Hidden::make('municipality_id')
+                            ->default(Filament::auth()->user()->municipality_id),
                     ])
                     ->columns(1)
             ]);

@@ -2,6 +2,8 @@
 
 namespace App\Filament\Municipality\Resources;
 
+use App\Enums\Gender;
+use App\Enums\UserType;
 use App\Filament\Municipality\Resources\UserResource\Pages;
 use App\Filament\Municipality\Resources\UserResource\RelationManagers;
 use App\Models\ReportType;
@@ -35,21 +37,55 @@ class UserResource extends Resource
             ->schema([
                 Fieldset::make(__('User Info'))
                     ->schema([
-                        TextInput::make('name')
-                            ->label(__('Name'))
+                        Forms\Components\TextInput::make('first_name')
+                            ->label('First Name')
+                            ->translateLabel()
                             ->required()
-                            ->minLength(3)
-                            ->maxLength(255),
+                            ->maxLength(50),
 
-                        TextInput::make('email')
-                            ->label(__('Email'))
-                            ->unique(ignoreRecord: true)
+                        Forms\Components\TextInput::make('middle_name')
+                            ->label('Middle Name')
+                            ->translateLabel()
+                            ->required()
+                            ->maxLength(50),
+
+                        Forms\Components\TextInput::make('last_name')
+                            ->label('Last Name')
+                            ->translateLabel()
+                            ->required()
+                            ->maxLength(50),
+
+                        Forms\Components\TextInput::make('email')
+                            ->label('Email')
+                            ->translateLabel()
+                            ->required()
                             ->email()
-                            ->required()
-                            ->maxLength(255),
+                            ->unique(ignoreRecord: true)
+                            ->maxLength(50),
 
-                        TextInput::make('password')
-                            ->label(__('Password'))
+
+                        Forms\Components\TextInput::make('phone_number')
+                            ->label('Phone Number')
+                            ->translateLabel()
+                            ->required()
+                            ->unique(ignoreRecord: true)
+                            ->numeric(),
+
+                        Forms\Components\TextInput::make('national_number')
+                            ->label('National Number')
+                            ->translateLabel()
+                            ->required()
+                            ->numeric(),
+
+                        Forms\Components\Select::make('gender')
+                            ->label('Gender')
+                            ->translateLabel()
+                            ->options(Gender::getTranslations())
+                            ->required(),
+
+                        Forms\Components\TextInput::make('password')
+                            ->label('Password')
+                            ->translateLabel()
                             ->required()
                             ->password()
                             ->maxLength(255)
@@ -63,6 +99,12 @@ class UserResource extends Resource
                                 return [$item['id'] => __($item['name'])];
                             })->toArray())
                             ->multiple(),
+
+                        Forms\Components\Hidden::make('type')
+                            ->default(UserType::Employee->value),
+
+                        Forms\Components\Hidden::make('municipality_id')
+                            ->default(Filament::auth()->user()->municipality_id),
                     ])
                     ->columns(1),
             ]);
