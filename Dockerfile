@@ -8,11 +8,15 @@ USER root
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs
 
-# Install PHP intl and exif extensions
+# Install PHP intl, exif, and gd extensions
 RUN apt-get update && apt-get install -y \
     libicu-dev \
     libexif-dev \
-    && docker-php-ext-install intl exif
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install intl exif gd
 
 COPY --chown=www-data:www-data . /var/www/html
 
