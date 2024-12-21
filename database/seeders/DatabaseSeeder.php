@@ -24,14 +24,22 @@ class DatabaseSeeder extends Seeder
 
         $this->call(MunicipalitySeeder::class);
 
-        $user = User::factory()->create([
+        $admin = User::factory()->create([
             'email' => 'admin@admin.com',
             'password' => \Hash::make('password'),
-            'municipality_id' => 1,
             'type' => UserType::Admin
         ]);
 
-        $user->assignRole('admin');
+        $admin->assignRole('admin');
+
+        $employee = User::factory()->create([
+            'email' => 'employee@admin.com',
+            'password' => \Hash::make('password'),
+            'municipality_id' => 1,
+            'type' => UserType::Employee
+        ]);
+
+        $employee->assingRole('admin');
 
         $this->call(NewsSeeder::class);
         $this->call(ServiceSeeder::class);
