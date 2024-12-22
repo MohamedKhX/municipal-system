@@ -21,7 +21,7 @@ class ReportTypePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, ReportTypePolicy $reportType): bool
+    public function view(User $user, ReportType $reportType): bool
     {
         return $user->can('view_report_type');
     }
@@ -37,7 +37,7 @@ class ReportTypePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ReportTypePolicy $reportType): bool
+    public function update(User $user, ReportType $reportType): bool
     {
         return $user->can('manage_report_type');
     }
@@ -45,7 +45,7 @@ class ReportTypePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, ReportTypePolicy $reportType): bool
+    public function delete(User $user, ReportType $reportType): bool
     {
         return $user->can('manage_report_type');
     }

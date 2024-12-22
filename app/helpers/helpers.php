@@ -3,8 +3,9 @@
 
 function getCurrentMunicipality(): int
 {
-    $path = request()->path(); // e.g., "m/1"
-    $segments = explode('/', $path);
+    // Get the second segment after "m"
+    $municipalityId = request()->segment(2);
 
-    return isset($segments[1]) ? (int) $segments[1] : 1; // Return 0 if ID not found
+    // Ensure it returns an integer, defaulting to 1 if not found or invalid
+    return is_numeric($municipalityId) ? (int) $municipalityId : 1;
 }

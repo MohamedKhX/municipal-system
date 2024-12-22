@@ -11,6 +11,7 @@ use App\Models\Report;
 use App\Models\ReportType;
 use App\Models\Request;
 use App\Models\Response;
+use App\Notifications\RequestStateChanged;
 use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -151,7 +152,10 @@ class RequestResource extends Resource
                     })
                     ->form([
                         Select::make('status')
-                            ->options(RequestStatus::getTranslations())
+                            ->options([
+                                RequestStatus::Approved->value => RequestStatus::Approved->translate(),
+                                RequestStatus::Rejected->value => RequestStatus::Rejected->translate(),
+                            ])
                             ->translateLabel()
                             ->required()
                             ->native(false),
@@ -164,13 +168,18 @@ class RequestResource extends Resource
                         SpatieMediaLibraryFileUpload::make('municipalityAttachments')
                             ->label('Attachments')
                             ->translateLabel()
+                            ->multiple()
                             ->collection('municipalityAttachments')
 
                     ])
                     ->action(function (array $data, Request $record): void {
+
                         $record->status = $data['status'];
                         $record->response = $data['response'];
                         $record->save();
+
+                        $user = $record->user;
+                        $user->notify(new RequestStateChanged($record->id));
                     }),
 
                 Tables\Actions\DeleteAction::make(),

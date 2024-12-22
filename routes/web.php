@@ -46,6 +46,8 @@ Route::prefix('m/{municipality:id}')->group(function () {
 });
 
 Route::get('/', DetectLocation::class);
-
+Route::get('/notification', function () {
+    return view('notification');
+})->name('notification');
 
 require __DIR__.'/auth.php';

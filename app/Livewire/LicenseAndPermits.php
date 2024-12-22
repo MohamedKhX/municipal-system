@@ -98,7 +98,7 @@ class LicenseAndPermits extends Component
                 ->toMediaCollection('userAttachments');
         }
 
-        $this->redirect(route('request-sent'));
+        $this->redirect(route('request-sent', getCurrentMunicipality()));
     }
 
     public function render()

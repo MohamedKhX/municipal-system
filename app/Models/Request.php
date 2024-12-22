@@ -28,6 +28,16 @@ class Request extends Model implements HasMedia
         return $this->belongsTo(RequestType::class, 'request_type_id');
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function municipality(): BelongsTo
+    {
+        return $this->belongsTo(Municipality::class);
+    }
+
 
 
     public function fullName(): Attribute
