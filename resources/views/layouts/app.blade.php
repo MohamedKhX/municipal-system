@@ -90,13 +90,15 @@
                         <a class="navbar-brand" href="index.html">
                             <img src="{{ asset('images/small-logo.png') }}" alt="logo"/>
                         </a>
-                        <a class="position-relative" style="margin-right: 100px" href="{{ route('notification') }}">
-                            <i class="fas fa-bell"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        @auth()
+                            <a class="position-relative" style="margin-right: 100px" href="{{ route('notification') }}">
+                                <i class="fas fa-bell"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                 {{ auth()->user()->unreadNotifications->count() }}
                             <span class="visually-hidden">unread messages</span>
                           </span>
-                        </a>
+                            </a>
+                        @endauth
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav justify-content-center flex-grow-1">
                                 <li class="nav-item"><a href="{{ route('home',           getCurrentMunicipality()) }}" class="nav-link">الصفحة الرئيسية</a></li>
