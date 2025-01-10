@@ -118,6 +118,18 @@ class RequestResource extends Resource
                                             ->translateLabel()
                                             ->columnSpan(4),
 
+                                        TextEntry::make('location')
+                                            ->label('Location')
+                                            ->translateLabel()
+                                            ->url(function ($record) {
+                                                $lat = $record->location_latitude;
+                                                $long = $record->location_longitude;
+                                                $url = "https://www.google.com/maps/search/?api=1&query=$lat,$long";;
+                                                return $url;
+                                            })
+                                            ->default('اضغط لفتح الخرائط')
+                                            ->columnSpan(4),
+
                                         RepeatableEntry::make('userAttachments')
                                             ->label('Attachments')
                                             ->translateLabel()

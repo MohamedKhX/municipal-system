@@ -28,6 +28,9 @@ class RequestFactory extends Factory
 
             'status' => fake()->randomElement(RequestStatus::values()),
 
+            'location_latitude' => 32.8960958,
+            'location_longitude' => 13.2156857,
+
             'request_type_id' => fake()->randomElement([1,2,3,4,5,6,7,8,9]),
             'user_id' => 1,
             'municipality_id' => 1
