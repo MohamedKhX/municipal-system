@@ -23,6 +23,12 @@ class LicenseAndPermits extends Component
     #[Validate('required|min:3')]
     public string $last_name = '';
 
+    #[Validate('required')]
+    public $latitude;
+
+    #[Validate('required')]
+    public $longitude;
+
 
     public $photos = [];
 
@@ -39,6 +45,15 @@ class LicenseAndPermits extends Component
     public $requestTypes;
 
     public $requirements;
+
+
+    protected $listeners = ['updateCoordinates'];
+
+    public function updateCoordinates($lat, $lng): void
+    {
+        $this->latitude = $lat;
+        $this->longitude = $lng;
+    }
 
     public function mount(): void
     {
@@ -87,6 +102,8 @@ class LicenseAndPermits extends Component
             'middle_name' => $this->middle_name,
             'last_name' => $this->last_name,
             'subject' => $this->subject,
+            'location_latitude' => $this->latitude,
+            'location_longitude' => $this->longitude,
             'message' => $this->message,
             'request_type_id' => $this->requestType,
             'user_id' => auth()->id(),

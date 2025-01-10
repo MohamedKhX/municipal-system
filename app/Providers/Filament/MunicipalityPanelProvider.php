@@ -3,6 +3,8 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Municipality\Reports;
+use App\Reports\ReportPlugin;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use EightyNine\Reports\ReportsPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -32,8 +34,8 @@ class MunicipalityPanelProvider extends PanelProvider
             ->login()
             ->font('rubik')
             ->plugins([
-                ReportsPlugin::make(),
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+                ReportPlugin::make(),
+                FilamentShieldPlugin::make()
             ])
             ->colors([
                 'primary' => Color::Green,

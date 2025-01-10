@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('subject', 100);
             $table->text('message');
             $table->text('response')->nullable();
+            $table->decimal('location_latitude', 12, 8)->nullable();
+            $table->decimal('location_longitude', 12, 8)->nullable();
 
             $table->enum('status', \App\Enums\RequestStatus::values())
                 ->default(RequestStatus::Pending);

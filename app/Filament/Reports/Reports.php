@@ -24,7 +24,6 @@ class Reports extends Report
             ]);
     }
 
-
     public function body(Body $body): Body
     {
         return $body

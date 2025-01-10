@@ -47,6 +47,7 @@ class MunicipalityResource extends Resource
                                     ->required()
                                     ->numeric(),
                             ])
+                            ->minItems(3)
                     ])->columns(1),
                 ])->columns(1);
     }

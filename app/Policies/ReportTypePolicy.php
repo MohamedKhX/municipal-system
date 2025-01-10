@@ -15,7 +15,7 @@ class ReportTypePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_report_type');
+        return $user->can('view_shield::role');
     }
 
     /**
@@ -23,7 +23,7 @@ class ReportTypePolicy
      */
     public function view(User $user, ReportType $reportType): bool
     {
-        return $user->can('view_report_type');
+        return $user->can('view_shield::role');
     }
 
     /**
@@ -31,7 +31,7 @@ class ReportTypePolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('manage_report_type');
+        return $user->can('manage_shield::role');
     }
 
     /**
@@ -39,7 +39,7 @@ class ReportTypePolicy
      */
     public function update(User $user, ReportType $reportType): bool
     {
-        return $user->can('manage_report_type');
+        return $user->can('manage_shield::role');
     }
 
     /**
@@ -47,7 +47,7 @@ class ReportTypePolicy
      */
     public function delete(User $user, ReportType $reportType): bool
     {
-        return $user->can('manage_report_type');
+        return $user->can('manage_shield::role');
     }
 
     /**
@@ -55,6 +55,6 @@ class ReportTypePolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('manage_report_type');
+        return $user->can('manage_shield::role');
     }
 }

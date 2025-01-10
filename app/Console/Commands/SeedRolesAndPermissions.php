@@ -48,11 +48,18 @@ class SeedRolesAndPermissions extends Command
         $roleView           = Permission::findOrCreate('view_shield::role');
         $roleManage         = Permission::findOrCreate('manage_shield::role');
 
-        $requestTypeView    = Permission::findOrCreate('view_request_type');
-        $requestTypeManage  = Permission::findOrCreate('manage_request_type');
+        $requestTypeView    = Permission::findOrCreate('view_request::type');
+        $requestTypeManage  = Permission::findOrCreate('manage_request::type');
 
-        $reportTypeView    = Permission::findOrCreate('view_report_type');
-        $reportTypeManage  = Permission::findOrCreate('manage_report_type');
+        $reportTypeView    = Permission::findOrCreate('view_report::type');
+        $reportTypeManage  = Permission::findOrCreate('manage_report::type');
+
+        $viewRole = Permission::findOrCreate('view_role');
+        $viewAnyRole = Permission::findOrCreate('view_any_role');
+        $deleteAnyRole = Permission::findOrCreate('delete_any_role');
+        $deleteRole = Permission::findOrCreate('delete_role');
+        $createRole = Permission::findOrCreate('create_role');
+        $updateRole = Permission::findOrCreate('update_role');
 
         $admin->syncPermissions([
             $newsView,
@@ -71,6 +78,12 @@ class SeedRolesAndPermissions extends Command
             $userManage,
             $reportTypeView,
             $reportTypeManage,
+            $viewRole,
+            $viewAnyRole,
+            $deleteAnyRole,
+            $deleteRole,
+            $createRole,
+            $updateRole
         ]);
     }
 }

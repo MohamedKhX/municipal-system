@@ -16,7 +16,7 @@ class RequestTypePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_request_type');
+        return $user->can('view_request::type');
     }
 
     /**
@@ -24,7 +24,7 @@ class RequestTypePolicy
      */
     public function view(User $user, RequestType $requestType): bool
     {
-        return $user->can('view_request_type');
+        return $user->can('view_request::type');
     }
 
     /**
@@ -32,7 +32,7 @@ class RequestTypePolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('manage_request_type');
+        return $user->can('manage_request::type');
     }
 
     /**
@@ -40,7 +40,7 @@ class RequestTypePolicy
      */
     public function update(User $user, RequestType $requestType): bool
     {
-        return $user->can('manage_request_type');
+        return $user->can('manage_request::type');
     }
 
     /**
@@ -48,7 +48,7 @@ class RequestTypePolicy
      */
     public function delete(User $user, RequestType $requestType): bool
     {
-        return $user->can('manage_request_type');
+        return $user->can('manage_request::type');
     }
 
     /**
@@ -56,6 +56,6 @@ class RequestTypePolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('manage_request_type');
+        return $user->can('manage_request::type');
     }
 }

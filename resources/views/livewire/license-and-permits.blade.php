@@ -1,4 +1,81 @@
 <div>
+    @push('styles')
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+              integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+              crossorigin=""/>
+
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+                crossorigin="">
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Initialize the map and set view to a default location
+                var map = L.map('map').setView([0, 0], 2); // Center at (0,0) with zoom level 2
+
+                // Add the OpenStreetMap tiles
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        function (position) {
+                            // Get user's coordinates
+                            var lat = position.coords.latitude;
+                            var lng = position.coords.longitude;
+
+                            // Center the map on the user's location
+                            map.setView([lat, lng], 13); // Adjust zoom level as needed
+
+                            // Place a marker at the user's location
+                            marker = L.marker([lat, lng]).addTo(map);
+
+                            // Update input fields with user's location
+                            document.getElementById("latitude").value = lat;
+                            document.getElementById("longitude").value = lng;
+
+                            Livewire.dispatch('updateCoordinates', {
+                                lat: lat,
+                                lng: lng
+                            });
+                        },
+                        function () {
+                            alert("Location access denied. Please select your location on the map.");
+                        }
+                    );
+                } else {
+                    alert("Geolocation is not supported by this browser.");
+                }
+
+
+                var marker;
+
+                // Event listener for clicks on the map
+                map.on('click', function (e) {
+                    var lat = e.latlng.lat;
+                    var lng = e.latlng.lng;
+
+                    // Update input fields with user's location
+                    document.getElementById("latitude").value = lat;
+                    document.getElementById("longitude").value = lng;
+                    Livewire.dispatch('updateCoordinates', {
+                        lat: lat,
+                        lng: lng
+                    });
+                    if (marker) {
+                        map.removeLayer(marker);
+                    }
+
+                    marker = L.marker([lat, lng], {
+                        title: '',
+                        riseOnHover: true,
+                    }).addTo(map);
+                });
+            });
+        </script>
+    @endpush
     @push('scripts')
         @filepondScripts
     @endpush
@@ -11,6 +88,9 @@
             <div class="col-lg-8">
                 <div class="contact-form-text-area">
                     <form wire:submit="submit" id="contactForm" novalidate="true">
+                        <input id="latitude"  wire:model="latitude" type="hidden">
+                        <input id="longitude" wire:model="longitude" type="hidden">
+
                         <div class="row align-items-center">
                             <div class="col-md-4 col-sm-6 col-12">
                                 <div class="form-group">
@@ -91,6 +171,14 @@
                                     <textarea name="message" wire:model="message" id="message" class="form-control" placeholder="الرسالة..." cols="30" rows="5" required="" data-error="Please enter your message"></textarea>
                                     <x-input-error :messages="$errors->get('message')" class="mt-2" />
                                 </div>
+                            </div>
+                            @error('latitude')
+                            <div class="alert alert-danger" role="alert">
+                                أختر مكان على الخريطة!
+                            </div>
+                            @enderror
+                            <div class="mb-3" wire:ignore>
+                                <div id="map" style="width: 100%; height: 400px;"></div>
                             </div>
                             <x-filepond::upload wire:model="photos" :multiple="true"/>
                             <div class="col-md-12 col-sm-12 col-12">

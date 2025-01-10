@@ -36,7 +36,7 @@ class AuthenticatedSessionController extends Controller
             return redirect('/municipality');
         }
 
-        return redirect()->intended(route('home', getCurrentMunicipality(), absolute: false));
+        return redirect(route('home', getCurrentMunicipality()));
     }
 
     /**
