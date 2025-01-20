@@ -25,7 +25,7 @@ services:
             - VITE_APP_URL=https://municipal-system.laraplay.fun/
 
             - APP_LOCALE=ar
-            - APP_FALLBACK_LOCALE=en
+            - APP_FALLBACK_LOCALE=ar
             - APP_FAKER_LOCALE=en_US
 
             - APP_MAINTENANCE_DRIVER=file
