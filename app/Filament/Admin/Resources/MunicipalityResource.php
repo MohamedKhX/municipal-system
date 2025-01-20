@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Actions\TableActions\SecureDeleteAction;
 use App\Filament\Admin\Resources\MunicipalityResource\Pages;
 use App\Filament\Admin\Resources\MunicipalityResource\RelationManagers;
 use App\Models\Municipality;
@@ -62,7 +63,7 @@ class MunicipalityResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                SecureDeleteAction::make(),
             ]);
     }
 
