@@ -12,6 +12,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class News extends Model implements HasMedia
 {
+    //
     use HasFactory;
     use InteractsWithMedia;
 
