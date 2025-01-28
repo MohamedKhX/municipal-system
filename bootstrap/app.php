@@ -11,7 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'mun' => \App\Http\Middleware\Municipal::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

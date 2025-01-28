@@ -64,6 +64,29 @@ class MunicipalityResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 SecureDeleteAction::make(),
+                Tables\Actions\Action::make('active')
+                    ->label('Active')
+                    ->translateLabel()
+                    ->action(function ($record) {
+                        $record->is_active = true;
+                        $record->save();
+                    })
+                    ->color('success')
+                    ->icon('heroicon-s-check-circle')
+                    ->requiresConfirmation()
+                    ->hidden(fn($record) => $record->is_active),
+
+                Tables\Actions\Action::make('de_active')
+                    ->label('De Active')
+                    ->translateLabel()
+                    ->action(function ($record) {
+                        $record->is_active = false;
+                        $record->save();
+                    })
+                    ->color('danger')
+                    ->icon('heroicon-s-x-circle')
+                    ->requiresConfirmation()
+                    ->hidden(fn($record) => !$record->is_active)
             ]);
     }
 

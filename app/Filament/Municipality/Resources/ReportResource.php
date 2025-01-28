@@ -72,8 +72,12 @@ class ReportResource extends Resource
                     }),
 
                 Tables\Actions\DeleteAction::make(),
-
-                //Todo: Add action to open the report in new tab
+                Tables\Actions\Action::make('view_report')
+                    ->label('View')
+                    ->translateLabel()
+                    ->color('success')
+                    ->icon('tabler-eye')
+                    ->url(fn(Report $record) => route('reports.show', [auth()->user()->municipality->id, $record]), shouldOpenInNewTab: true),
             ]);
     }
 

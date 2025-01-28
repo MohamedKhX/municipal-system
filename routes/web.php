@@ -9,7 +9,7 @@ use App\Livewire\DetectLocation;
 use Illuminate\Support\Facades\Route;
 
 
-Route::prefix('m/{municipality:id}')->group(function () {
+Route::prefix('m/{municipality:id}')->middleware('mun')->group(function () {
 
     Route::get('/', [HomeController::class, 'home'])
         ->name('home');
@@ -43,7 +43,8 @@ Route::prefix('m/{municipality:id}')->group(function () {
 
     Route::view('/request-sent', 'request-sent')
         ->name('request-sent');
-});
+})
+;
 
 Route::get('/', DetectLocation::class);
 Route::get('/notification', function () {
