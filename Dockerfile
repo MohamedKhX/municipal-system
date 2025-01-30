@@ -6,8 +6,6 @@ ENV PHP_OPCACHE_ENABLE=1 \
 
 # Install system dependencies and PHP extensions
 USER root
-
-# Install build tools and PHP extension dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     gcc \
@@ -18,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
+    libonig-dev \          # Fixes oniguruma error
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) intl exif gd pdo_mysql mbstring \
     && apt-get clean \
