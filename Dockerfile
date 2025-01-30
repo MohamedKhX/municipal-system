@@ -29,7 +29,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs
 
 # Copy dependency files first (for caching)
-COPY --chown=www-data:www-data composer.* package*.json ./
+COPY --chown=www-data:www-data . /var/www/html
 
 # Install Composer dependencies
 RUN composer install --no-interaction --optimize-autoloader
