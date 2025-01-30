@@ -30,11 +30,11 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 # Copy dependency files first (for caching)
 COPY --chown=www-data:www-data composer.* package*.json ./
 
-# Install npm dependencies and build
-RUN npm install && npm run build
-
 # Install Composer dependencies
 RUN composer install --no-interaction --optimize-autoloader
+
+# Install npm dependencies and build
+RUN npm install && npm run build
 
 # Copy the rest of the application
 COPY --chown=www-data:www-data . /var/www/html
