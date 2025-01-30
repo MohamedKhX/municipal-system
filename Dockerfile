@@ -17,9 +17,10 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
-    libonig-dev  # Fixes oniguruma error \
+    libonig-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) intl exif gd pdo_mysql mbstring \
+    && docker-php-ext-enable intl exif \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
