@@ -2,13 +2,8 @@ FROM serversideup/php:8.3-fpm-nginx
 
 ENV PHP_OPCACHE_ENABLE=1
 
+# Install system dependencies and PHP extensions
 USER root
-
-# Install Node.js
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
-RUN apt-get install -y nodejs
-
-# Install PHP intl, exif, and gd extensions
 RUN apt-get update && apt-get install -y \
     libicu-dev \
     libexif-dev \
@@ -16,17 +11,36 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     libfreetype6-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install intl exif gd
+    && docker-php-ext-install -j$(nproc) intl exif gd pdo_mysql mbstring
 
-COPY --chown=www-data:www-data . /var/www/html
+# Install Node.js securely
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
 
-USER www-data
+# Copy dependency files first (for caching)
+COPY --chown=www-data:www-data composer.* package*.json ./
 
-RUN npm install
-RUN npm run build
+# Install npm dependencies and build
+RUN npm install && npm run build
 
-# Run Composer with --ignore-platform-req=ext-exif to avoid issues in case the extension is not required.
+# Install Composer dependencies
 RUN composer install --no-interaction --optimize-autoloader
 
-# Run migrations and seeds
-RUN php artisan migrate --force && php artisan db:seed --force
+# Copy the rest of the application
+COPY --chown=www-data:www-data . /var/www/html
+
+# Fix permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Override PHP-FPM pool settings
+RUN echo "[www]\npm = dynamic\npm.max_children = 50\npm.start_servers = 10\npm.min_spare_servers = 8\npm.max_spare_servers = 20\n" > /etc/php/8.3/fpm/pool.d/z-overrides.conf
+
+# Override Nginx configuration
+COPY custom-nginx.conf /etc/nginx/sites-available/default.conf
+
+# Entrypoint for migrations
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+USER www-data
