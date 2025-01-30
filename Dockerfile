@@ -2,11 +2,12 @@ FROM serversideup/php:8.3-fpm-nginx
 
 # Set default environment variables
 ENV PHP_OPCACHE_ENABLE=1 \
-    APP_NAME="My App (Default)"
+    APP_NAME="My App (Default)" \
+    DEBIAN_FRONTEND=noninteractive
 
 # Install system dependencies and PHP extensions
 USER root
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     build-essential \
     gcc \
     g++ \
@@ -16,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
-    libonig-dev \          # Fixes oniguruma error \
+    libonig-dev  # Fixes oniguruma error \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) intl exif gd pdo_mysql mbstring \
     && apt-get clean \
