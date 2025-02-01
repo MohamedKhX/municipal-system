@@ -19,19 +19,19 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 COPY --chown=www-data:www-data . /var/www/html
 
-
-
-# Install Node.js & Composer
+# Install Node.js
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
+    && apt-get install -y nodejs
 
+# Switch to www-data user
 USER www-data
 
 RUN npm install
 RUN npm run build
 RUN composer install --no-interaction --optimize-autoloader
 
-# Set Permissions
+# Set Permissions (run as root again if needed)
+USER root
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
     && chmod -R 775 /var/www/html/bootstrap/cache
