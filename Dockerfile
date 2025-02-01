@@ -23,14 +23,19 @@ COPY --chown=www-data:www-data . /var/www/html
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs
 
-# Switch to www-data user
+# Configure npm permissions
+RUN mkdir -p /var/www/.npm \
+    && chown -R www-data:www-data /var/www/.npm
+
+# Switch to www-data user with proper environment
 USER www-data
+ENV HOME /var/www
 
 RUN npm install
 RUN npm run build
 RUN composer install --no-interaction --optimize-autoloader
 
-# Set Permissions (run as root again if needed)
+# Switch back to root for system operations
 USER root
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
