@@ -1,5 +1,7 @@
 FROM php:8.2-apache
 
+USER root
+
 # Enable Apache Rewrite Module
 RUN a2enmod rewrite
 
@@ -17,11 +19,13 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 COPY --chown=www-data:www-data . /var/www/html
 
-USER www-data
+
 
 # Install Node.js & Composer
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs
+    && apt-get install -y nodejs \
+
+USER www-data
 
 RUN npm install
 RUN npm run build
