@@ -17,7 +17,7 @@ services:
             - APP_NAME="Municipality"
             - APP_ENV=local
             - APP_KEY=base64:mXouEHDVQd6YlJ8qrZlNWLF2mDV34+ivDdAn4Y57pac=
-            - APP_DEBUG=false
+            - APP_DEBUG=true
             - APP_TIMEZONE=UTC
 
             - APP_URL=https://municipal-system.laraplay.fun
