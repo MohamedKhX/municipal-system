@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title', 100);
             $table->text('body');
 
+            $table->softDeletes();
             $table->foreignId('municipality_id')->references('id')->on('municipalities');
             $table->timestamps();
         });

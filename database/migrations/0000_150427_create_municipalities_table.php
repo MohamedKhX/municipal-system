@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name', 50);
             $table->json('boundary');
             $table->boolean('is_active')->default(1);
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

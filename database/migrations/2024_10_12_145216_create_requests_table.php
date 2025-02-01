@@ -27,6 +27,7 @@ return new class extends Migration
             $table->enum('status', \App\Enums\RequestStatus::values())
                 ->default(RequestStatus::Pending);
 
+            $table->softDeletes();
             $table->foreignId('request_type_id')->references('id')->on('request_types');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('municipality_id')->references('id')->on('municipalities');

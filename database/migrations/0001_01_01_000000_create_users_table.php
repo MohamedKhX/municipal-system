@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
 
+            $table->softDeletes();
             $table->enum('gender', \App\Enums\Gender::values());
             $table->enum('type', \App\Enums\UserType::values())
                 ->default(\App\Enums\UserType::Citizen);

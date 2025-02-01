@@ -16,6 +16,7 @@ return new class extends Migration
             $table->text('review');
             $table->enum('rating', \App\Enums\Rating::values());
 
+            $table->softDeletes();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('service_id')->references('id')->on('services');
 

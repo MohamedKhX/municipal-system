@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('status', \App\Enums\ReportStatus::values())
                 ->default(\App\Enums\ReportStatus::Open);
 
+            $table->softDeletes();
             $table->foreignId('report_type_id')->references('id')->on('report_types');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('municipality_id')->references('id')->on('municipalities');
