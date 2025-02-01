@@ -89,7 +89,7 @@
                     <nav class="navbar navbar-expand-md navbar-light">
                         <a class="navbar-brand d-flex align-items-center gap-3" href="index.html">
                             <img src="{{ asset('images/logo.png') }}" width="50" alt="logo"/>
-                            بلديتي
+                            منصة بلديتي
                         </a>
                         @auth()
                             <a class="position-relative" style="margin-right: 100px" href="{{ route('notification') }}">
