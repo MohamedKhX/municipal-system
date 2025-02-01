@@ -42,16 +42,18 @@
                 <div class="col-lg-6">
                     <div class="banner-text-area">
                         <h6>{{ \App\Models\Municipality::find($municipalityId)->name }}</h6>
-                        <h1>نحن نطور مدينة مستدامة</h1>
-                        <p>لوريم إيبسوم دولور سيت أميت، كونسيكتيتور أديبيسكنغ، فاسيليس هييندريت لوريم دولور سيت أميت ماجنا
-                            نيب نيك أورنا إن نيسي نيكي أليكيت.</p>
+                        <h1>نحو خدمات بلدية متطورة وتطوير حضري مستدام</h1>
+                        <p>نسعى لتوسعة نطاق الخدمات البلدية وتحسين البنية التحتية بما يتماشى مع معايير الاستدامة العالمية، مع التركيز على راحة المواطن وجودة الحياة</p>
                         <a class="default-button" href="about.html">تعرف على المزيد</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="home-banner-area">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/85/Libya_5101_Fozzigiaren_Arch_Tadrart_Acacus_Luca_Galuzzi_2007.jpg" alt="image">
+                    <div class="row d-flex justify-center">
+                        <div class="home-banner-area d-flex justify-content-center">
+                            <img src="{{ asset('images/home.jpg') }}" width="500" alt="image">
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>

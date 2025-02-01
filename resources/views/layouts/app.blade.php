@@ -72,7 +72,7 @@
             <div class="main-responsive-nav">
                 <div class="container">
                     <div class="mobile-nav">
-                        <a href="index.html" class="logo"><img src="{{ asset('images/small-logo.png') }}" alt="logo"/></a>
+                        <a href="index.html" class="logo"><img src="{{ asset('images/logo.png') }}" alt="logo"/></a>
                         <ul class="menu-sidebar menu-small-device">
                             <li>
                                 <button class="popup-button"><i class="fas fa-search"></i></button>
@@ -87,8 +87,9 @@
             <div class="main-nav">
                 <div class="container">
                     <nav class="navbar navbar-expand-md navbar-light">
-                        <a class="navbar-brand" href="index.html">
-                            <img src="{{ asset('images/small-logo.png') }}" alt="logo"/>
+                        <a class="navbar-brand d-flex align-items-center gap-3" href="index.html">
+                            <img src="{{ asset('images/logo.png') }}" width="50" alt="logo"/>
+                            بلديتي
                         </a>
                         @auth()
                             <a class="position-relative" style="margin-right: 100px" href="{{ route('notification') }}">
