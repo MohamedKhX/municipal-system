@@ -8,11 +8,12 @@ RUN a2enmod rewrite
 # Update Document Root
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-# Install Dependencies
+# Install Dependencies (with zip extension)
 RUN apt-get update && apt-get install -y \
-    libicu-dev libpng-dev libjpeg-dev libfreetype6-dev curl unzip \
+    libicu-dev libpng-dev libjpeg-dev libfreetype6-dev \
+    libzip-dev curl unzip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install intl exif gd
+    && docker-php-ext-install intl exif gd zip
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
