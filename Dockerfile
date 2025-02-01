@@ -3,8 +3,6 @@ FROM php:8.2-apache
 # Enable Apache Rewrite Module
 RUN a2enmod rewrite
 
-
-
 # Update Document Root
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
@@ -14,11 +12,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install intl exif gd \
 
-# Set working directory
-WORKDIR /var/www/html
+COPY --chown=www-data:www-data . /var/www/html
 
-# Copy application files first
-COPY . /var/www/html
+USER www-data
 
 # Install Node.js & Composer
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - \
