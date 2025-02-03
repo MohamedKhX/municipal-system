@@ -1,68 +1,49 @@
-FROM php:8.2-apache
+FROM serversideup/php:8.3-fpm-nginx
 
-# Set working directory
+ENV PHP_OPCACHE_ENABLE=1
+
+USER root
+
+# Install Node.js
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs
+
+# Install PHP intl, exif, and gd extensions
+RUN apt-get update && apt-get install -y \
+    libicu-dev \
+    libexif-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install intl exif gd
+
+# Set up working directory
 WORKDIR /var/www/html
 
-# Install system dependencies as root
-RUN apt-get update && apt-get install -y \
-    libicu-dev libpng-dev libjpeg-dev libfreetype6-dev \
-    libzip-dev curl unzip git \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install intl exif gd zip pdo pdo_mysql \
-    && a2enmod rewrite
+# Copy project files
+COPY --chown=www-data:www-data . /var/www/html
 
-# Configure Apache (as root)
-RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+# Set correct permissions
+RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
-# Install Composer (as root)
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Install Node.js (as root)
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs
-
-# Create application user and set directory permissions
-RUN useradd -u 1000 -d /var/www -s /bin/bash -g www-data www-data \
-    && mkdir -p /var/www/.npm \
-    && chown -R www-data:www-data /var/www
-
-# Copy application files with proper permissions
-COPY --chown=www-data:www-data . .
-
-# Switch to application user
 USER www-data
-ENV HOME=/var/www
 
-# Install frontend dependencies
-RUN npm install --cache /var/www/.npm
-
-# Build frontend assets
-RUN npm run build
+# Install dependencies and build assets
+RUN npm install && npm run build
 
 # Install PHP dependencies
 RUN composer install --no-interaction --optimize-autoloader
 
-# Switch back to root for final system configuration
+# Run migrations and seeds
+RUN php artisan migrate --force && php artisan db:seed --force
+
+# Ensure PHP-FPM runs properly
 USER root
+RUN mkdir -p /run/php && chown -R www-data:www-data /run/php
 
-# Set directory permissions for web server
-RUN chown -R www-data:www-data /var/www/html \
-    && find /var/www/html -type d -exec chmod 755 {} \; \
-    && find /var/www/html -type f -exec chmod 644 {} \; \
-    && chmod -R 775 storage bootstrap/cache
-
-# Run application setup
-RUN php artisan config:cache \
-    && php artisan route:cache \
-    && php artisan view:cache
-
-# Ensure proper ownership of Apache run directories
-RUN chown -R www-data:www-data /var/run/apache2 \
-    && chown -R www-data:www-data /var/log/apache2
-
-# Switch back to www-data for execution
-USER www-data
-
-# Expose and run
+# Expose the Nginx port
 EXPOSE 80
-CMD ["apache2-foreground"]
+
+# Start PHP-FPM and Nginx
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]
