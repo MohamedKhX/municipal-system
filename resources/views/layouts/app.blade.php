@@ -73,13 +73,6 @@
                 <div class="container">
                     <div class="mobile-nav">
                         <a href="index.html" class="logo"><img width="30" src="{{ asset('images/logo.png') }}" alt="logo"/></a>
-                        <ul class="menu-sidebar menu-small-device">
-                            <li>
-                                <button class="popup-button"><i class="fas fa-search"></i></button>
-                            </li>
-                            <li><a class="default-button" href="contact.html">احصل على عرض <i class="fas fa-angle-right"></i></a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
