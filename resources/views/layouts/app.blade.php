@@ -145,9 +145,8 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                             <div class="footer-logo-area">
-                                <a href="index.html"><img src="assets/images/white-logo.png" alt="image"></a>
-                                <p>لوريم إيبسوم دولور سيت أميت، كونسيكتيتور أديبيسكنغ إيليت، تيمبور إنكيديدونت أوت لابوري
-                                    إت دولوري ماغنا أليكوا كونسيكتيتور أديبيسكنغ إيليت سيد دو لابور.</p>
+                                <a href="index.html"><img src="{{ asset('images/logo.png') }}" width="100" alt="image"></a>
+                                <p>نعمل على تسهيل التواصل بين المواطنين والبلديات لتقديم البلاغات، طلبات الرخص والتصاريح، ومتابعة أخبار بلديتك بسهولة</p>
                                 <div class="footer-social-area">
                                     <ul>
                                         <li><span>تابعنا: </span></li>
@@ -166,20 +165,20 @@
                                     <i class="fas fa-map-marker-alt"></i>
                                     <h5>الموقع: </h5>
                                     <p>
-                                        <a href="">بجانب سوق الشط</a>
+                                        <a href="">طرابلس - النوفليين</a>
                                     </p>
                                 </div>
                                 <div class="footer-contact-card">
                                     <i class="fas fa-envelope"></i>
                                     <h5>البريد الإلكتروني: </h5>
                                     <p>
-                                        <a href="">example@example.com</a>
+                                        <a href="">contact@municipality-portal.com</a>
                                     </p>
                                 </div>
                                 <div class="footer-contact-card">
                                     <i class="fas fa-phone-alt"></i>
                                     <h5>الهاتف: </h5>
-                                    <p><a href="tel:+13454567877">+1-3454-5678-77</a></p>
+                                    <p><a href="tel:+13454567877">+218 91 0078033</a></p>
                                 </div>
                             </div>
                         </div>
