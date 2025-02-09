@@ -41,7 +41,7 @@ class DetectLocation extends Component
 
         // If no municipality is found, handle the fallback case
         session()->flash('error', 'No municipality found for the provided location.');
-        return redirect()->route('home', $municipality->id);
+        return redirect()->route('home', 1);
     }
 
     private function isPointInPolygon($lng, $lat, $polygon)
