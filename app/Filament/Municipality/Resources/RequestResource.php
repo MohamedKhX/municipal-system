@@ -10,6 +10,7 @@ use App\Livewire\CreateResponse;
 use App\Models\Report;
 use App\Models\ReportType;
 use App\Models\Request;
+use App\Models\RequestType;
 use App\Models\Response;
 use App\Notifications\RequestStateChanged;
 use Filament\Facades\Filament;
@@ -27,6 +28,7 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Colors\Color;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
@@ -72,6 +74,19 @@ class RequestResource extends Resource
                     ->color(fn($state) => $state->getColor())
                     ->icon(fn($state) => $state->getIcon())
                     ->formatStateUsing(fn($state) => $state->translate()),
+            ])
+            ->filters([
+                SelectFilter::make('status')
+                    ->label('Status')
+                    ->options(RequestStatus::getTranslations())
+                    ->translateLabel()
+                    ->multiple(),
+
+                SelectFilter::make('request_type_id')
+                    ->label('Type')
+                    ->translateLabel()
+                    ->options(RequestType::get()->pluck('name', 'id')->toArray())
+                    ->multiple(),
             ])
             ->actions([
                 Tables\Actions\Action::make('changeStatus')

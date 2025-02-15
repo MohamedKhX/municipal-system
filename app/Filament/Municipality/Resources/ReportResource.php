@@ -7,6 +7,7 @@ use App\Filament\Municipality\Resources\ReportResource\Pages;
 use App\Filament\Municipality\Resources\ReportResource\RelationManagers;
 use App\Models\News;
 use App\Models\Report;
+use App\Models\ReportType;
 use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
@@ -14,6 +15,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\Colors\Color;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -51,6 +53,19 @@ class ReportResource extends Resource
                     ->icon(fn($state) => $state->getIcon())
                     ->formatStateUsing(fn($state) => $state->translate()),
                 ])
+            ->filters([
+                SelectFilter::make('status')
+                    ->label('Status')
+                    ->translateLabel()
+                    ->options(ReportStatus::getTranslations())
+                    ->multiple(),
+
+                SelectFilter::make('report_type_id')
+                    ->label('Type')
+                    ->translateLabel()
+                    ->options(ReportType::pluck('name', 'id')->toArray())
+                    ->multiple()
+            ])
             ->actions([
                 Tables\Actions\Action::make('changeStatus')
                     ->label('Change Status')
